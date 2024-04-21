@@ -2369,7 +2369,12 @@ footer .logo {
     top: 50%;
     transform: translateY(-50%);
 }
-
+.ask form textarea:focus{
+    border: 1px solid #9c9c9c;
+}
+.ask form .attachments input:focus{
+    border-bottom: 1px solid #9c9c9c;
+}
 .user-setting > a i {
     color: #999;
     font-size: 12px;
