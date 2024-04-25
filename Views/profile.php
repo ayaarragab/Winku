@@ -1,302 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-	<title>Winku Social Network Toolkit</title>
-    <link rel="icon" href="images/fav.png" type="image/png" sizes="16x16"> 
-    
-    <link rel="stylesheet" href="css/main.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/color.css">
-    <link rel="stylesheet" href="css/responsive.css">
-
-</head>
-<body>
-<!--<div class="se-pre-con"></div>-->
-<div class="theme-layout">
-	
-	<div class="responsive-header">
-		<div class="mh-head first Sticky">
-			<span class="mh-btns-left">
-				<a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
-			</span>
-			<span class="mh-text">
-				<a href="index.html" title=""><img src="images/logo2.png" alt=""></a>
-			</span>
-			<span class="mh-btns-right">
-				<a class="fa fa-sliders" href="#shoppingbag"></a>
-			</span>
-		</div>
-		<div class="mh-head second">
-			<form class="mh-form">
-				<input placeholder="search" />
-				<a href="#/" class="fa fa-search"></a>
-			</form>
-		</div>
-		<nav id="menu" class="res-menu">
-			<ul>
-				<li>
-					<a href="index.html" title="">Home</a>
-				</li>
-				<li>
-					<a href="Forum.html" title="">Categroies</a>
-				</li>
-				<li>
-					<a href="profile.html" title="">Profile</a>
-				</li>
-				<li>
-					<a href="add-question.html" title="" style="text-decoration: underline; font-weight: bold; font-size: 1rem;">Add a question</a>
-				</li>			
-			</ul>
-		</nav>
-		<nav id="shoppingbag">
-			<div>
-				<div class="">
-					<form method="post">
-						<div class="setting-row">
-							<span>use night mode</span>
-							<input type="checkbox" id="nightmode"/> 
-							<label for="nightmode" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Notifications</span>
-							<input type="checkbox" id="switch2"/> 
-							<label for="switch2" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Notification sound</span>
-							<input type="checkbox" id="switch3"/> 
-							<label for="switch3" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>My profile</span>
-							<input type="checkbox" id="switch4"/> 
-							<label for="switch4" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Show profile</span>
-							<input type="checkbox" id="switch5"/> 
-							<label for="switch5" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-					</form>
-					<h4 class="panel-title">Account Setting</h4>
-					<form method="post">
-						<div class="setting-row">
-							<span>Sub users</span>
-							<input type="checkbox" id="switch6" /> 
-							<label for="switch6" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>personal account</span>
-							<input type="checkbox" id="switch7" /> 
-							<label for="switch7" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Business account</span>
-							<input type="checkbox" id="switch8" /> 
-							<label for="switch8" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Show me online</span>
-							<input type="checkbox" id="switch9" /> 
-							<label for="switch9" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Delete history</span>
-							<input type="checkbox" id="switch10" /> 
-							<label for="switch10" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-						<div class="setting-row">
-							<span>Expose author name</span>
-							<input type="checkbox" id="switch11" /> 
-							<label for="switch11" data-on-label="ON" data-off-label="OFF"></label>
-						</div>
-					</form>
-				</div>
-			</div>
-		</nav>
-	</div><!-- responsive header (نفس الحجات الي فالhome بس دا جزء الresponsive مش تكرار)-->		
-	<div class="topbar stick">
-		<div class="container">
-		<div class="logo">
-			<a title="" href="index.html"><img src="images/logo.png" alt=""></a>
-		</div>
-		
-		<div class="top-area">
-			<ul class="main-menu">
-				<li>
-					<a href="index.html" title="">Home</a>
-				</li>
-				<li>
-					<a href="Forum.html" title="">Categroies</a>
-				</li>
-				<li>
-					<a href="profile.html" title="">Profile</a>
-				</li>
-				<li>
-					<a href="add-question.html" title="" style="text-decoration: underline; font-weight: bold; font-size: 1rem;">Add a question</a>
-				</li>
-			</ul>
-			<ul class="setting-area mt-3">
-				<li>
-					<a href="#" title="Home" data-ripple=""><i class="ti-search"></i></a>
-					<div class="searched">
-						<form method="post" class="form-search">
-							<input type="text" placeholder="Search Friend">
-							<button data-ripple><i class="ti-search"></i></button>
-						</form>
-					</div>
-				</li>
-				<li>
-					<a href="#" title="Notification" data-ripple="">
-						<i class="ti-bell"></i><span>20</span>
-					</a>
-					<div class="dropdowns">
-						<span>4 New Notifications</span>
-						<ul class="drops-menu">
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-1.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>sarah Loren</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag green">New</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-2.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Jhon doe</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag red">Reply</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-3.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Andrew</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag blue">Unseen</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-4.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Tom cruse</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag">New</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-5.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Amy</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag">New</span>
-							</li>
-						</ul>
-						<a href="notifications.html" title="" class="more-mesg">view more</a>
-					</div>
-				</li>
-				<li>
-					<a href="#" title="Messages" data-ripple=""><i class="ti-comment"></i><span>12</span></a>
-					<div class="dropdowns">
-						<span>5 New Messages</span>
-						<ul class="drops-menu">
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-1.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>sarah Loren</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag green">New</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-2.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Jhon doe</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag red">Reply</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-3.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Andrew</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag blue">Unseen</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-4.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Tom cruse</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag">New</span>
-							</li>
-							<li>
-								<a href="notifications.html" title="">
-									<img src="images/resources/thumb-5.jpg" alt="">
-									<div class="mesg-meta">
-										<h6>Amy</h6>
-										<span>Hi, how r u dear ...?</span>
-										<i>2 min ago</i>
-									</div>
-								</a>
-								<span class="tag">New</span>
-							</li>
-						</ul>
-						<a href="messages.html" title="" class="more-mesg">view more</a>
-					</div>
-				</li>
-				<li><a href="#" title="Languages" data-ripple=""><i class="fa fa-globe"></i></a>
-					<div class="dropdowns languages">
-						<a href="#" title=""><i class="ti-check"></i>English</a>
-						<a href="#" title="">Arabic</a>
-						<a href="#" title="">Dutch</a>
-						<a href="#" title="">French</a>
-					</div>
-				</li>
-				<li><a href="#" title="logout" style="display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: 0.5px;"><i class="ti-power-off"></i><small>logout</small></a></li>
-			</ul>
-			<span class="ti-menu main-menu" data-ripple=""></span>
-		</div>
-	</div><!-- topbar -->
-	</div>	
-		
+<?php
+include('assests/header.php')
+?>
 	<section>
 		<div class="feature-photo">
 			<figure><img src="images/resources/timeline-1.jpg" alt=""></figure>
@@ -335,12 +39,12 @@
 								  <span>Group Admin</span>
 								</li>
 								<li>
-									<a class="active" href="time-line.html" title="" data-ripple="">time line</a>
-									<a class="" href="timeline-photos.html" title="" data-ripple="">Photos</a>
-									<a class="" href="timeline-videos.html" title="" data-ripple="">Videos</a>
-									<a class="" href="timeline-friends.html" title="" data-ripple="">Friends</a>
-									<a class="" href="timeline-groups.html" title="" data-ripple="">Groups</a>
-									<a class="" href="about.html" title="" data-ripple="">about</a>
+									<a class="active" href="time-line.php" title="" data-ripple="">time line</a>
+									<a class="" href="timeline-photos.php" title="" data-ripple="">Photos</a>
+									<a class="" href="timeline-videos.php" title="" data-ripple="">Videos</a>
+									<a class="" href="timeline-friends.php" title="" data-ripple="">Friends</a>
+									<a class="" href="timeline-groups.php" title="" data-ripple="">Groups</a>
+									<a class="" href="about.php" title="" data-ripple="">about</a>
 									<a class="" href="#" title="" data-ripple="">more</a>
 								</li>
 							</ul>
@@ -349,7 +53,7 @@
 				</div>
 			</div>
 		</div>
-	</section><!-- top area -->
+	</section>
 		
 	<section>
 		<div class="gap gray-bg">
@@ -378,47 +82,47 @@
 										<ul class="naves">
 											<li>
 												<i class="ti-clipboard"></i>
-												<a href="newsfeed.html" title="">News feed</a>
+												<a href="newsfeed.php" title="">News feed</a>
 											</li>
 											<li>
 												<i class="ti-mouse-alt"></i>
-												<a href="inbox.html" title="">Inbox</a>
+												<a href="inbox.php" title="">Inbox</a>
 											</li>
 											<li>
 												<i class="ti-files"></i>
-												<a href="fav-page.html" title="">My pages</a>
+												<a href="fav-page.php" title="">My pages</a>
 											</li>
 											<li>
 												<i class="ti-user"></i>
-												<a href="timeline-friends.html" title="">friends</a>
+												<a href="timeline-friends.php" title="">friends</a>
 											</li>
 											<li>
 												<i class="ti-image"></i>
-												<a href="timeline-photos.html" title="">images</a>
+												<a href="timeline-photos.php" title="">images</a>
 											</li>
 											<li>
 												<i class="ti-video-camera"></i>
-												<a href="timeline-videos.html" title="">videos</a>
+												<a href="timeline-videos.php" title="">videos</a>
 											</li>
 											<li>
 												<i class="ti-comments-smiley"></i>
-												<a href="messages.html" title="">Messages</a>
+												<a href="messages.php" title="">Messages</a>
 											</li>
 											<li>
 												<i class="ti-bell"></i>
-												<a href="notifications.html" title="">Notifications</a>
+												<a href="notifications.php" title="">Notifications</a>
 											</li>
 											<li>
 												<i class="ti-share"></i>
-												<a href="people-nearby.html" title="">People Nearby</a>
+												<a href="people-nearby.php" title="">People Nearby</a>
 											</li>
 											<li>
 												<i class="fa fa-bar-chart-o"></i>
-												<a href="insights.html" title="">insights</a>
+												<a href="insights.php" title="">insights</a>
 											</li>
 											<li>
 												<i class="ti-power-off"></i>
-												<a href="landing.html" title="">Logout</a>
+												<a href="landing.php" title="">Logout</a>
 											</li>
 										</ul>
 									</div><!-- Shortcuts -->
@@ -429,20 +133,20 @@
 												<div class="activity-meta">
 													<i>10 hours Ago</i>
 													<span><a href="#" title="">Commented on Video posted </a></span>
-													<h6>by <a href="newsfeed.html">black demon.</a></h6>
+													<h6>by <a href="newsfeed.php">black demon.</a></h6>
 												</div>
 											</li>
 											<li>
 												<div class="activity-meta">
 													<i>30 Days Ago</i>
-													<span><a href="newsfeed.html" title="">Posted your status. “Hello guys, how are you?”</a></span>
+													<span><a href="newsfeed.php" title="">Posted your status. “Hello guys, how are you?”</a></span>
 												</div>
 											</li>
 											<li>
 												<div class="activity-meta">
 													<i>2 Years Ago</i>
 													<span><a href="#" title="">Share a video on her timeline.</a></span>
-													<h6>"<a href="newsfeed.html">you are so funny mr.been.</a>"</h6>
+													<h6>"<a href="newsfeed.php">you are so funny mr.been.</a>"</h6>
 												</div>
 											</li>
 										</ul>
@@ -453,35 +157,35 @@
 											<li>
 												<figure><img src="images/resources/friend-avatar2.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Kelly Bill</a></h4>
+													<h4><a href="time-line.php" title="">Kelly Bill</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar4.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Issabel</a></h4>
+													<h4><a href="time-line.php" title="">Issabel</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar6.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Andrew</a></h4>
+													<h4><a href="time-line.php" title="">Andrew</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar8.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Sophia</a></h4>
+													<h4><a href="time-line.php" title="">Sophia</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
 											<li>
 												<figure><img src="images/resources/friend-avatar3.jpg" alt=""></figure>
 												<div class="friend-meta">
-													<h4><a href="time-line.html" title="">Allen</a></h4>
+													<h4><a href="time-line.php" title="">Allen</a></h4>
 													<a href="#" title="" class="underline">Add Friend</a>
 												</div>
 											</li>
@@ -541,7 +245,7 @@
 													<img src="images/resources/friend-avatar10.jpg" alt="">
 												</figure>
 												<div class="friend-name">
-													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<ins><a href="time-line.php" title="">Janice Griffith</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="description">
@@ -632,7 +336,7 @@
 													<img src="images/resources/friend-avatar10.jpg" alt="">
 												</figure>
 												<div class="friend-name">
-													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<ins><a href="time-line.php" title="">Janice Griffith</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="post-meta">
@@ -715,7 +419,7 @@
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Jason borne</a></h5>
+																<h5><a href="time-line.php" title="">Jason borne</a></h5>
 																<span>1 year ago</span>
 																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 															</div>
@@ -728,7 +432,7 @@
 																</div>
 																<div class="we-comment">
 																	<div class="coment-head">
-																		<h5><a href="time-line.html" title="">alexendra dadrio</a></h5>
+																		<h5><a href="time-line.php" title="">alexendra dadrio</a></h5>
 																		<span>1 month ago</span>
 																		<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 																	</div>
@@ -741,7 +445,7 @@
 																</div>
 																<div class="we-comment">
 																	<div class="coment-head">
-																		<h5><a href="time-line.html" title="">Olivia</a></h5>
+																		<h5><a href="time-line.php" title="">Olivia</a></h5>
 																		<span>16 days ago</span>
 																		<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 																	</div>
@@ -756,7 +460,7 @@
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Donald Trump</a></h5>
+																<h5><a href="time-line.php" title="">Donald Trump</a></h5>
 																<span>1 week ago</span>
 																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 															</div>
@@ -807,7 +511,7 @@
 													<img src="images/resources/friend-avatar10.jpg" alt="">
 												</figure>
 												<div class="friend-name">
-													<ins><a href="time-line.html" title="">Janice Griffith</a></ins>
+													<ins><a href="time-line.php" title="">Janice Griffith</a></ins>
 													<span>published: june,2 2018 19:PM</span>
 												</div>
 												<div class="post-meta">
@@ -890,7 +594,7 @@
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Jason borne</a></h5>
+																<h5><a href="time-line.php" title="">Jason borne</a></h5>
 																<span>1 year ago</span>
 																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 															</div>
@@ -904,7 +608,7 @@
 														</div>
 														<div class="we-comment">
 															<div class="coment-head">
-																<h5><a href="time-line.html" title="">Sophia</a></h5>
+																<h5><a href="time-line.php" title="">Sophia</a></h5>
 																<span>1 week ago</span>
 																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
 															</div>
@@ -978,7 +682,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">bucky barnes</a>
+													<a href="time-line.php">bucky barnes</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4136282f352433322e2d25243301262c20282d6f222e2c">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -988,7 +692,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
+													<a href="time-line.php">Sarah Loren</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3a585b48545f497a5d575b535614595557">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -998,7 +702,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">jason borne</a>
+													<a href="time-line.php">jason borne</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="127873617d7c7052757f737b7e3c717d7f">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1008,7 +712,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">Cameron diaz</a>
+													<a href="time-line.php">Cameron diaz</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="620803110d0c0022050f030b0e4c010d0f">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1019,7 +723,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
+													<a href="time-line.php">daniel warber</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0963687a66676b496e64686065276a6664">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1030,7 +734,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">andrew</a>
+													<a href="time-line.php">andrew</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5b313a283435391b3c363a323775383436">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1041,7 +745,7 @@
 													<span class="status f-off"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">amy watson</a>
+													<a href="time-line.php">amy watson</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472d263428292507202a262e2b6924282a">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1052,7 +756,7 @@
 													<span class="status f-online"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
+													<a href="time-line.php">daniel warber</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a101b091514183a1d171b131654191517">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1063,7 +767,7 @@
 													<span class="status f-away"></span>
 												</figure>
 												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
+													<a href="time-line.php">Sarah Loren</a>
 													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1e1d0e12190f3c1b111d1510521f1311">[email&#160;protected]</a></i>
 												</div>
 											</li>
@@ -1139,159 +843,6 @@
 			</div>
 		</div>	
 	</section>
-
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-4">
-					<div class="widget">
-						<div class="foot-logo">
-							<div class="logo">
-								<a href="index-2.html" title=""><img src="images/logo.png" alt=""></a>
-							</div>	
-							<p>
-								The trio took this simple idea and built it into the world’s leading carpooling platform.
-							</p>
-						</div>
-						<ul class="location">
-							<li>
-								<i class="ti-map-alt"></i>
-								<p>33 new montgomery st.750 san francisco, CA USA 94105.</p>
-							</li>
-							<li>
-								<i class="ti-mobile"></i>
-								<p>+1-56-346 345</p>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4">
-					<div class="widget">
-						<div class="widget-title"><h4>follow</h4></div>
-						<ul class="list-style">
-							<li><i class="fa fa-facebook-square"></i> <a href="https://web.facebook.com/shopcircut/" title="">facebook</a></li>
-							<li><i class="fa fa-twitter-square"></i><a href="https://twitter.com/login?lang=en" title="">twitter</a></li>
-							<li><i class="fa fa-instagram"></i><a href="https://www.instagram.com/?hl=en" title="">instagram</a></li>
-							<li><i class="fa fa-google-plus-square"></i> <a href="https://plus.google.com/discover" title="">Google+</a></li>
-							<li><i class="fa fa-pinterest-square"></i> <a href="https://www.pinterest.com/" title="">Pintrest</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4">
-					<div class="widget">
-						<div class="widget-title"><h4>Navigate</h4></div>
-						<ul class="list-style">
-							<li><a href="about.html" title="">about us</a></li>
-							<li><a href="contact.html" title="">contact us</a></li>
-							<li><a href="terms.html" title="">terms & Conditions</a></li>
-							<li><a href="#" title="">RSS syndication</a></li>
-							<li><a href="sitemap.html" title="">Sitemap</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4">
-					<div class="widget">
-						<div class="widget-title"><h4>useful links</h4></div>
-						<ul class="list-style">
-							<li><a href="#" title="">leasing</a></li>
-							<li><a href="#" title="">submit route</a></li>
-							<li><a href="#" title="">how does it work?</a></li>
-							<li><a href="#" title="">agent listings</a></li>
-							<li><a href="#" title="">view All</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2 col-md-4">
-					<div class="widget">
-						<div class="widget-title"><h4>download apps</h4></div>
-						<ul class="colla-apps">
-							<li><a href="https://play.google.com/store?hl=en" title=""><i class="fa fa-android"></i>android</a></li>
-							<li><a href="https://www.apple.com/lae/ios/app-store/" title=""><i class="ti-apple"></i>iPhone</a></li>
-							<li><a href="https://www.microsoft.com/store/apps" title=""><i class="fa fa-windows"></i>Windows</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer><!-- footer -->
-	<div class="bottombar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<span class="copyright"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></span>
-					<i><img src="images/credit-cards.png" alt=""></i>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-	<div class="side-panel">
-		<h4 class="panel-title">General Setting</h4>
-		<form method="post">
-			<div class="setting-row">
-				<span>use night mode</span>
-				<input type="checkbox" id="nightmode1"/> 
-				<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Notifications</span>
-				<input type="checkbox" id="switch22" /> 
-				<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Notification sound</span>
-				<input type="checkbox" id="switch33" /> 
-				<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>My profile</span>
-				<input type="checkbox" id="switch44" /> 
-				<label for="switch44" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Show profile</span>
-				<input type="checkbox" id="switch55" /> 
-				<label for="switch55" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-		</form>
-		<h4 class="panel-title">Account Setting</h4>
-		<form method="post">
-			<div class="setting-row">
-				<span>Sub users</span>
-				<input type="checkbox" id="switch66" /> 
-				<label for="switch66" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>personal account</span>
-				<input type="checkbox" id="switch77" /> 
-				<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Business account</span>
-				<input type="checkbox" id="switch88" /> 
-				<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Show me online</span>
-				<input type="checkbox" id="switch99" /> 
-				<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Delete history</span>
-				<input type="checkbox" id="switch101" /> 
-				<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-			<div class="setting-row">
-				<span>Expose author name</span>
-				<input type="checkbox" id="switch111" /> 
-				<label for="switch111" data-on-label="ON" data-off-label="OFF"></label>
-			</div>
-		</form>
-	</div><!-- side panel -->		
-	
-	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.min.js"></script>
-	<script src="js/script.js"></script>
-
-</body>	
-
-</html>
+<?php
+include('assests/footer.php')
+?>
