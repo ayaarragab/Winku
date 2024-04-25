@@ -28,10 +28,21 @@ include('assests/header.php')
 								</div><!-- sidebar -->
 								<div class="col-lg-6">
 									<div class="loadMore">
-										<h3 style="color: black; font-weight: bold;" >Top Questions</h3>
+									<h3 style="color: black; font-weight: bold;" >Top Questions</h3>
 									<div class="central-meta item"> <!-- Questions -->
 										<div class="user-post">
-											<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are some essential skills for a software engineer?</h5></a>
+											<div class="title-and-ellipse d-flex ">
+												<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are some essential skills for a software engineer?</h5></a>
+												<i id="ellipse-element" class="fa-solid fa-ellipsis-vertical cursor-pointer" style="font-size:30px; margin-top:2px"></i>
+											</div>
+											<div class="d-flex ff">
+												<ul id="op-list" class="options-list" style="display: none;">
+													<li><i class="fa-solid fa-pen"></i><span class="p-2">Edit</span></li>
+													<li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li>
+													<li><i class="fa-solid fa-flag"></i><span class="p-2">Report</span></li>
+													<li><i class="fa-solid fa-bookmark"></i><span class="p-2">Bookmark</span></li>
+												</ul>
+											</div>
 											<div class="friend-info">
 												<div class="friend-name">
 													<ins><a title="" href="time-line.php" style="font-size: 1rem;">Janice Griffith</a></ins>
@@ -244,7 +255,18 @@ include('assests/header.php')
 									</div>
 									<div class="central-meta item"> <!-- Questions -->
 										<div class="user-post">
-											<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are common interview questions for software engineering roles, and how can I best prepare to succeed?</h5></a>
+											<div class="title-and-ellipse d-flex ">
+												<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are common interview questions for software engineering roles, and how can I best prepare to succeed?</h5></a>
+												<i id="ellipse-element" class="fa-solid fa-ellipsis-vertical cursor-pointer" style="font-size:30px; margin-top:2px"></i>
+											</div>
+											<div class="d-flex ff">
+												<ul id="op-list" class="options-list" style="display: none;">
+													<li><i class="fa-solid fa-pen"></i><span class="p-2">Edit</span></li>
+													<li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li>
+													<li><i class="fa-solid fa-flag"></i><span class="p-2">Report</span></li>
+													<li><i class="fa-solid fa-bookmark"></i><span class="p-2">Bookmark</span></li>
+												</ul>
+											</div>
 											<div class="friend-info">
 												<div class="friend-name">
 													<ins><a title="" href="time-line.php" style="font-size: 1rem;">Janice Griffith</a></ins>
@@ -457,7 +479,18 @@ include('assests/header.php')
 									</div>
 									<div class="central-meta item"> <!-- Questions -->
 										<div class="user-post">
-											<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">Can someone provide insights into emerging AI technologies and their potential impact?</h5></a>
+											<div class="title-and-ellipse d-flex ">
+												<a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are the best resources for learning programming languages and software development?</h5></a>
+												<i id="ellipse-element" class="fa-solid fa-ellipsis-vertical cursor-pointer" style="font-size:30px; margin-top:2px"></i>
+											</div>
+											<div class="d-flex ff">
+												<ul id="op-list" class="options-list" style="display: none;">
+													<li><i class="fa-solid fa-pen"></i><span class="p-2">Edit</span></li>
+													<li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li>
+													<li><i class="fa-solid fa-flag"></i><span class="p-2">Report</span></li>
+													<li><i class="fa-solid fa-bookmark"></i><span class="p-2">Bookmark</span></li>
+												</ul>
+											</div>
 											<div class="friend-info">
 												<div class="friend-name">
 													<ins><a title="" href="time-line.php" style="font-size: 1rem;">Janice Griffith</a></ins>

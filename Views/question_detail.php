@@ -30,7 +30,18 @@ include('assests/header.php')
 									<div class="loadMore">
 									<div class="central-meta item"> <!-- Questions -->
 										<div class="user-post">
-											<a href="question_detail.html"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are some essential skills for a software engineer?</h5></a>
+											<div class="title-and-ellipse d-flex">
+												<h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are some essential skills for a software engineer?</h5>
+												<i id="ellipse-element" class="fa-solid fa-ellipsis-vertical cursor-pointer" style="font-size:30px; margin-top:2px"></i>
+											</div>
+											<div class="d-flex ff">
+												<ul id="op-list" class="options-list" style="display: none;">
+													<li><i class="fa-solid fa-pen"></i><span class="p-2">Edit</span></li>
+													<li><i class="fa-solid fa-trash"></i><span class="p-2">Delete</span></li>
+													<li><i class="fa-solid fa-flag"></i><span class="p-2">Report</span></li>
+													<li><i class="fa-solid fa-bookmark"></i><span class="p-2">Bookmark</span></li>
+												</ul>
+											</div>
 											<div class="friend-info">
 												<div class="friend-name">
 													<ins><a title="" href="time-line.html" style="font-size: 1rem;">Janice Griffith</a></ins>
