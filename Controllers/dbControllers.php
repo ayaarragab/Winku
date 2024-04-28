@@ -49,11 +49,12 @@ class DBMapper{
         $data = DBbSQLOperations::fetch($sql);
         return $data;
     }
-    public static function retrieveSpecificAttr($table, $id, $attrname) {
+    public static function retrieveSpecificAttr($table, $uniqueIdentifier, $attrname) {
         $conditions = [];
         // Join the conditions with AND and construct the SQL query
         $conditionString = implode(' AND ', $conditions);
-        $sql = 'SELECT '.$attrname.' FROM ' . $table . ' WHERE id = ' . $id;
+        // Assuming $attrname, $table, and $uniqueIdentifier are properly sanitized inputs
+        $sql = "SELECT $attrname FROM $table WHERE id = '$uniqueIdentifier' OR username = '$uniqueIdentifier'";
         
         // Execute the query
         $data = DBbSQLOperations::fetch($sql);

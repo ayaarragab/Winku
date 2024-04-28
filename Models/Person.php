@@ -93,19 +93,19 @@ abstract class Person{
         $this->numAnswers = $numAnswers;
     }
 
-    public function getNumFollowers(): int {
+    public function getnumFollowers(): int {
         return $this->numFollowers;
     }
 
-    public function setNumFollowers(int $numFollowers): void {
+    public function setnumFollowers(int $numFollowers): void {
         $this->numFollowers = $numFollowers;
     }
 
-    public function getNumFollowings(): int {
+    public function getnumFollowings(): int {
         return $this->numFollowings;
     }
 
-    public function setNumFollowings(int $numFollowings): void {
+    public function setnumFollowings(int $numFollowings): void {
         $this->numFollowings = $numFollowings;
     }
 

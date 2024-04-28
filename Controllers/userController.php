@@ -1,7 +1,7 @@
 <?php
-
 require_once '../controllers/dbControllers.php';
 require_once '../models/User.php';
+
 class UserController{
     public static function registerUser($username, $password) {
         if (!UserController::validateInput($username, $password))
@@ -49,5 +49,47 @@ class UserController{
         if (isset($_SESSION) && isset($_SESSION['userId'])) {
             DBMapper::edit('users', $_SESSION['userId'], $arrOfKeyValue);
         }   
+    }
+    public static function incrementData($tableName, $columnName, $id, $object)
+    {
+        $value = intval(DBMapper::retrieveSpecificAttr($tableName, $id, $columnName));
+        if (is_int($value)) {
+            UserController::updateData($id, array($columnName => ++$value));
+            call_user_func([$object, 'set'.$columnName], $value);
+        }
+        else {
+            echo 'Error in updating data';
+        }
+    }
+    public static function incrementDataDB($tableName, $columnName, $uniqueIdentifier)
+    {
+        $value = intval(DBMapper::retrieveSpecificAttr($tableName, $uniqueIdentifier, $columnName));
+        if (is_int($value)) {
+            UserController::updateData($$uniqueIdentifier, array($columnName => ++$value));
+        }
+        else {
+            echo 'Error in updating data';
+        }
+    }
+}
+
+class UserFollower{
+    public $userId;
+    public $followerId;
+    public function __construct($userId, $followerId) {
+        $this->followerId = $followerId;
+        $this->userId = $userId;
+    }
+
+    public static function getUserFollowers($userId) {
+    }
+
+    public static function getUserFollowings($userId) {
+    }
+
+    public static function getNumUserFollowers($userId) {
+    }
+
+    public static function getNumUserFollowings($userId) {
     }
 }
