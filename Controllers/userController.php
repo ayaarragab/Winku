@@ -2,7 +2,7 @@
 
 require_once '../controllers/dbControllers.php';
 require_once '../models/User.php';
-class UserController {
+class UserController{
     public static function registerUser($username, $password) {
         if (!UserController::validateInput($username, $password))
             return false;
@@ -11,7 +11,6 @@ class UserController {
 
             return false;
         } 
-
         // Insert new user into the database
         $user = new User($username, $password);
         // db::insert('users', $user);
