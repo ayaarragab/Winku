@@ -65,7 +65,7 @@ class UserController{
             $question = new Question($username, $body, $tags ,$date , "0", '0', '0', $title);
             $result = DBMapper::add('questions', $question);
             if ($result) {
-                echo "Question added successfully";
+                return $question;
             } else {
                 echo "Error adding question";
             }
@@ -80,7 +80,6 @@ class UserController{
                 return false;
             }
         }
-        echo 'does that work?';
         return true;
     }
 }

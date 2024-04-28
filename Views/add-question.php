@@ -1,14 +1,6 @@
-<?php 
-
-include_once '../controllers/dbControllers.php';
-include_once '../Models/Question.php';
-require_once '../Controllers/userController.php';
-if (isset($_POST['title'])) {
-	UserController::add_question('ayaragab', $_POST['body'], $_POST['tags'], '0', '0', '0', $_POST['title']);
-}
-?>
 <?php
-include('assests/header.php')
+include('assests/header.php');
+require_once '../Controllers/add_question_logic.php';
 ?>					
 	<section>
 			<div class="gap gray-bg">
@@ -40,7 +32,7 @@ include('assests/header.php')
 									<div class="central-meta">
 										<div class="new-postbox">
 											<div class="newpst-input">
-												<form action="" method="post">
+												<form action="index.php" method="POST">
                                                     <h5 style="color: black; font-weight: bold;" >Write the question title</h5>
 													<textarea name="title" rows="1" style="font-size: large;" placeholder="e.g. What are the princiles of industry today?"></textarea>
                                                     <h5 style="color: black; font-weight: bold;" >Write the question body</h5>

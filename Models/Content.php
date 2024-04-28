@@ -51,4 +51,7 @@ class Content {
     public function getNumViews() {
         return $this->numOfViews;
     }
+    public function getPublishedDate(){
+        return $this->publishedDate;
+    }
 }
