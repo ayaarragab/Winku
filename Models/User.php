@@ -1,7 +1,7 @@
 <?php
 require_once '../controllers/dbControllers.php';
-require_once 'Models/Person.php';
-require_once 'Models/Question.php';
+require_once 'Person.php';
+require_once 'Question.php';
 class User extends Person
 {
     private $numQuestions;
@@ -87,7 +87,7 @@ class User extends Person
         return $this->suggestedCategories;
     }
 
-    public function addQuestion($content)
+    public function addQuestion($title, $content, $tags)
     {
     }
 

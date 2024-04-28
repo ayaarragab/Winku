@@ -1,3 +1,12 @@
+<?php 
+
+include_once '../controllers/dbControllers.php';
+include_once '../Models/Question.php';
+require_once '../Controllers/userController.php';
+if (isset($_POST['title'])) {
+	UserController::add_question('ayaragab', $_POST['body'], $_POST['tags'], '0', '0', '0', $_POST['title']);
+}
+?>
 <?php
 include('assests/header.php')
 ?>					
@@ -31,11 +40,11 @@ include('assests/header.php')
 									<div class="central-meta">
 										<div class="new-postbox">
 											<div class="newpst-input">
-												<form method="post">
+												<form action="" method="post">
                                                     <h5 style="color: black; font-weight: bold;" >Write the question title</h5>
-													<textarea rows="1" style="font-size: large;" placeholder="e.g. What are the princiles of industry today?"></textarea>
+													<textarea name="title" rows="1" style="font-size: large;" placeholder="e.g. What are the princiles of industry today?"></textarea>
                                                     <h5 style="color: black; font-weight: bold;" >Write the question body</h5>
-													<textarea rows="4" style="font-size: large;" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt molestiae temporibus, earum nihil dolorum odio illo. Blanditiis eligendi ipsum quam sequi corrupti, est expedita explicabo aliquam, porro qui repudiandae minus."></textarea>
+													<textarea  name="body" rows="4" style="font-size: large;" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt molestiae temporibus, earum nihil dolorum odio illo. Blanditiis eligendi ipsum quam sequi corrupti, est expedita explicabo aliquam, porro qui repudiandae minus."></textarea>
 													<div class="attachments">
 														<ul>
 															<li>
@@ -47,8 +56,8 @@ include('assests/header.php')
 														</ul>
 													</div>
 													<h5 style="color: black; font-weight: bold;" >Tags</h5>
-													<textarea rows="1" style="font-size: large;" placeholder="e.g. #web #python #oop"></textarea>
-                                                    <button style="border-radius: 10px;" class="mt-4" type="submit">Ask</button>
+													<textarea name="tags" rows="1" style="font-size: large;" placeholder="e.g. #web #python #oop"></textarea>
+                                                    <button style="border-radius: 10px;" name="" class="mt-4" type="submit">Ask</button>
 												</form>
 											</div>
 										</div>
@@ -59,7 +68,7 @@ include('assests/header.php')
 							</div>	
 						</div>
 					</div>
-				</div>
+			</div>
 	
 	</section>
 

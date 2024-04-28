@@ -3,20 +3,6 @@ require_once '../controllers/dbControllers.php';
 require_once '../models/User.php';
 
 class UserController{
-    public static function registerUser($username, $password) {
-        if (!UserController::validateInput($username, $password))
-            return false;
-        if (UserController::userExists($username, $password)){
-            echo 'user already exists!';
-
-            return false;
-        } 
-        // Insert new user into the database
-        $user = new User($username, $password);
-        // db::insert('users', $user);
-        return DBMapper::add('users', $user);
-        // return db::getConnection()->insert_id;
-    }
     public static function validateInput($username, $password) {
         if (empty($username) || empty($password)) {
             return false;
@@ -70,6 +56,32 @@ class UserController{
         else {
             echo 'Error in updating data';
         }
+    }
+    public static function add_question($username, $body, $tags, $numReacts, $numReports, $numViews, $title)
+    {
+        $date = date("Y-m-d");
+        if (UserController::validateInputs($username, $body, $tags, $numReacts, $numReports, $numViews, $title)) {
+            echo '<br>did you go here?<br>';
+            $question = new Question($username, $body, $tags ,$date , "0", '0', '0', $title);
+            $result = DBMapper::add('questions', $question);
+            if ($result) {
+                echo "Question added successfully";
+            } else {
+                echo "Error adding question";
+            }
+        }
+    }
+    public static function validateInputs(...$inputs)
+    {
+        foreach ($inputs as $input) {
+            
+            if ((!isset($input) || empty($input) && $input != '0')) {
+                echo $input;
+                return false;
+            }
+        }
+        echo 'does that work?';
+        return true;
     }
 }
 
