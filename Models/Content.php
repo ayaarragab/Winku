@@ -1,14 +1,14 @@
 <?php
 
 class Content {
-    public $id;
-    public $username;
-    public $publishedDate;
-    public $body;
-    public $numOfReacts;
-    public $numOfReports;
-    public $numOfViews;
-    public $title;
+    protected $id;
+    protected $username;
+    protected $publishedDate;
+    protected $body;
+    protected $numOfReacts;
+    protected $numOfReports;
+    protected $numOfViews;
+    protected $title;
 
     protected function __construct($title, $username, $body) {
         $this->title=$title;
@@ -40,15 +40,15 @@ class Content {
         // Delete content from the database
     }
 
-    public function getNumReacts() {
+    public function getNumOfReacts() {
         return $this->numOfReacts;
     }
 
-    public function getNumReports() {
+    public function getNumOfReports() {
         return $this->numOfReports;
     }
 
-    public function getNumViews() {
+    public function getNumOfViews() {
         return $this->numOfViews;
     }
     public function getPublishedDate(){

@@ -23,7 +23,7 @@ include('assests/header.php')
 									<a href="#" title="">purify</a>
 								</div>
 							</div>
-							<a class="addnewforum" href="forum-create-topic.html" title=""><i class="fa fa-plus"></i> Add New category</a>
+							<a class="addnewforum" href="forum-create-topic.php" title=""><i class="fa fa-plus"></i> Add New category</a>
 						</div>
 						<div class="forum-list">
 							<h3 style="color: black; font-weight: bold;" >Categories</h3>

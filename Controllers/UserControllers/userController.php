@@ -3,12 +3,7 @@ require_once '../controllers/dbControllers.php';
 require_once '../models/User.php';
 
 class UserController{
-    public static function validateInput($username, $password) {
-        if (empty($username) || empty($password)) {
-            return false;
-        }
-        return true;
-    }
+
     private static function userExists($username, $password) {
         // $data = db::fetch('SELECT username FROM users WHERE username = "'.$username.'"'.' AND password ="'.$password.'";');
         $data = DBMapper::retrieve('users',  array('username' => $username, 'password' => $password));
@@ -57,50 +52,12 @@ class UserController{
             echo 'Error in updating data';
         }
     }
-    public static function add_question($username, $body, $tags, $numReacts, $numReports, $numViews, $title)
-    {
-        $date = date("Y-m-d");
-        if (UserController::validateInputs($username, $body, $tags, $numReacts, $numReports, $numViews, $title)) {
-            echo '<br>did you go here?<br>';
-            $question = new Question($username, $body, $tags ,$date , "0", '0', '0', $title);
-            $result = DBMapper::add('questions', $question);
-            if ($result) {
-                return $question;
-            } else {
-                echo "Error adding question";
-            }
-        }
-    }
-    public static function validateInputs(...$inputs)
-    {
-        foreach ($inputs as $input) {
-            
-            if ((!isset($input) || empty($input) && $input != '0')) {
-                echo $input;
-                return false;
-            }
-        }
-        return true;
-    }
+
+
+
+
+
+
+
 }
 
-class UserFollower{
-    public $userId;
-    public $followerId;
-    public function __construct($userId, $followerId) {
-        $this->followerId = $followerId;
-        $this->userId = $userId;
-    }
-
-    public static function getUserFollowers($userId) {
-    }
-
-    public static function getUserFollowings($userId) {
-    }
-
-    public static function getNumUserFollowers($userId) {
-    }
-
-    public static function getNumUserFollowings($userId) {
-    }
-}

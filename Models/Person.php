@@ -1,10 +1,9 @@
 <?php
-abstract class Person{
+class Person{
     private $id;
-    private $gender;
-    private $firstName;
-    private $secondName;
+    private $fullName;
     private $username;
+    private $gender;
     private $email;
     private $password;
     private $numAnswers;
@@ -14,22 +13,21 @@ abstract class Person{
     private $bio;
     private $country;
     private $professionalTitle;
-    public function __construct(string $gender, string $firstName, string $secondName, string $username, string $email, string $password, int $numAnswers, int $numFollowers, int $numFollowings, string $profilePhoto, string $bio, string $country, string $professionalTitle) {
+    public function __construct($gender, $username, $email, $password, $fullName) {
         $this->gender = $gender;
-        $this->firstName = $firstName;
-        $this->secondName = $secondName;
+        $this->fullName = $fullName;
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
-        $this->numAnswers = $numAnswers;
-        $this->numFollowers = $numFollowers;
-        $this->numFollowings = $numFollowings;
-        $this->profilePhoto = $profilePhoto;
-        $this->bio = $bio;
-        $this->country = $country;
-        $this->professionalTitle = $professionalTitle;
+        $this->numAnswers = 0;
+        $this->numFollowers = 0;
+        $this->numFollowings = 0;
+        $this->profilePhoto = 'no photos added yet';
+        $this->bio = 'no bio added yet';
+        $this->country = 'no country specified yet';
+        $this->professionalTitle = 'no title specified yet';
     }
-    public function getId(): int {
+    public function getid(): int {
         return $this->id;
     }
 
@@ -37,39 +35,32 @@ abstract class Person{
         $this->id = $id;
     }
 
-    public function getGender(): string {
+    public function getgender(): string {
         return $this->gender;
     }
 
-    public function setGender(string $gender): void {
+    public function setgender(string $gender): void {
         $this->gender = $gender;
     }
 
-    public function getFirstName(): string {
-        return $this->firstName;
+    public function getfullName(): string {
+        return $this->fullName;
     }
 
-    public function setFirstName(string $firstName): void {
-        $this->firstName = $firstName;
+    public function setfullName(string $fullName): void {
+        $this->fullName = $fullName;
     }
 
-    public function getSecondName(): string {
-        return $this->secondName;
-    }
 
-    public function setSecondName(string $secondName): void {
-        $this->secondName = $secondName;
-    }
-
-    public function getUsername(): string {
+    public function getusername(): string {
         return $this->username;
     }
 
-    public function setUsername(string $username): void {
+    public function setusername(string $username): void {
         $this->username = $username;
     }
 
-    public function getEmail(): string {
+    public function getemail(): string {
         return $this->email;
     }
 
@@ -77,7 +68,7 @@ abstract class Person{
         $this->email = $email;
     }
 
-    public function getPassword(): string {
+    public function getpassword(): string {
         return $this->password;
     }
 
@@ -85,7 +76,7 @@ abstract class Person{
         $this->password = $password;
     }
 
-    public function getNumAnswers(): int {
+    public function getnumAnswers(): int {
         return $this->numAnswers;
     }
 
@@ -109,15 +100,15 @@ abstract class Person{
         $this->numFollowings = $numFollowings;
     }
 
-    public function getProfilePhoto(): string {
+    public function getprofilePhoto(): string {
         return $this->profilePhoto;
     }
 
-    public function setProfilePhoto(string $profilePhoto): void {
+    public function setprofilePhoto(string $profilePhoto): void {
         $this->profilePhoto = $profilePhoto;
     }
 
-    public function getBio(): string {
+    public function getbio(): string {
         return $this->bio;
     }
 
@@ -125,7 +116,7 @@ abstract class Person{
         $this->bio = $bio;
     }
 
-    public function getCountry(): string {
+    public function getcountry(): string {
         return $this->country;
     }
 
@@ -133,7 +124,7 @@ abstract class Person{
         $this->country = $country;
     }
 
-    public function getProfessionalTitle(): string {
+    public function getprofessionalTitle(): string {
         return $this->professionalTitle;
     }
 

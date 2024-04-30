@@ -2,7 +2,7 @@
 include_once 'Content.php';
 
 class Question extends Content {
-    public $tags;
+    protected $tags;
     public function __construct($username, $body, $tags ,$publishDate, $numberOfReacts, $numberOfReports, $numberOfViews, $title){
         parent::__construct($title, $username, $body) ;
             $this->title = $title;
@@ -14,5 +14,8 @@ class Question extends Content {
             $this->numOfReports = $numberOfReports;
             $this->numOfViews = $numberOfViews;
     }
-
+    public function getTags()
+    {
+        return $this->tags;
+    }
 }
