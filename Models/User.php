@@ -13,9 +13,9 @@ class User
     public $userToSubcategory;
     public $auth;
     public $mapper;
-    public function __construct($gender, $username, $email, $password, $fullName)
+    public function __construct($fullName, $username, $gender, $email, $password)
     {
-        $this->builder = new UserBuilder($gender, $username, $email, $password, $fullName);
+        $this->builder = new UserBuilder($fullName, $username, $gender, $email, $password);
         $this->userToQuestion = new UserToQuestion();
         $this->userToUser = new UserToUser();
         $this->userToAnswer = new UserToAnswer();

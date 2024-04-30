@@ -1,6 +1,7 @@
 <?php
-require_once '../auth/Authenticator.php';
-require_once '../UserControllers/userMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\auth\Authenticator.php';
+require_once 'userMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Models\User.php';
 class UserAuthenticator extends Authenticator{
     public static function valueAssociativeArr($arr)
     {
@@ -13,7 +14,7 @@ class UserAuthenticator extends Authenticator{
         }
         return $allNull;
     }
-    public static function register($Rname , $Remail , $Rpass , $Rusername , $Rgender)
+    public static function register($Rname , $Remail , $Rgender , $Rusername, $Rpass)
     {
             $arr_Err=array("nameErr"=>"" , "usernameErr"=>"" , "emailErr"=>"" , "passErr"=>"" );
             if(empty($Rname ))
@@ -60,7 +61,8 @@ class UserAuthenticator extends Authenticator{
         if(!self::valueAssociativeArr($arr_Err)){
             $Rname =  self::checkInput($Rname);
             $Remail = self::checkInput($Remail);
-            $Rpass = sha1(self::checkInput($Rpass));
+            $Rpass = self::checkInput($Rpass);
+            $Rpass = sha1($Rpass);
             $Rusername = self::checkInput($Rusername);
             if($Rname && $Remail && $Rpass && $Rusername){
                 if (isset($_POST['genderMale'])) {
@@ -79,8 +81,8 @@ class UserAuthenticator extends Authenticator{
                     echo 'duplicate username';
                 }
                 else{
-                        $user = new User($Rgender, $Rusername, $Remail, $Rpass, $Rname);
-                        $check = UserMapper::add($user);
+                        $user = new User($Rname, $Rusername, $Rgender, $Remail, $Rpass);
+                        $check = UserMapper::add($user->builder);
                         if($check){
                             return "success";
                         }else{

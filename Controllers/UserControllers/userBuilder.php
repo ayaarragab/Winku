@@ -11,9 +11,10 @@ class UserBuilder extends Person
     private $suggestedCategory;
     public function __construct($password, $gender, $fullName, $username, $email)
     {
-        parent::__construct($gender, $fullName, $username, $email, $password);
+        parent::__construct($fullName, $username, $gender, $email, $password);
         $this->numQuestions = 0;
         $this->fullName = $fullName;
+        $this->username = $username;
         $this->password = $password;
         $this->privilgedOrNot = false;
         $this->numOfReports = 0;

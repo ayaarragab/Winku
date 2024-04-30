@@ -1,6 +1,7 @@
 <?php
 include('assests/header.php');
-require_once '../Controllers/add_question_logic.php';
+require_once '../Controllers/questionControllers/add_question_logic.php';
+session_start();
 ?>			
 		<section>
 			<div class="gap gray-bg">
@@ -31,6 +32,8 @@ require_once '../Controllers/add_question_logic.php';
 									<div class="loadMore">
 									<h3 style="color: black; font-weight: bold;" >Top Questions</h3>
 									<?php
+									if ($_SESSION['username']) {
+
 										echo '<div class="central-meta item">';
 										echo '<div class="user-post">';
 										echo '<div class="title-and-ellipse d-flex ">';
@@ -220,8 +223,7 @@ require_once '../Controllers/add_question_logic.php';
 										</form>
 									</div>
 								</li>
-							</ul>
-						</div>'
+							</ul></div>';									}
 									?>
 									</div>
 								</div>

@@ -3,7 +3,7 @@ class DBConnection{
     private static $host = 'localhost';
     private static $user = 'root';
     private static $password = '';
-    private static $database = 'test';
+    private static $database = 'winku';
     private static $port_number = 3306;
     private static $conn;
     private function __construct() {

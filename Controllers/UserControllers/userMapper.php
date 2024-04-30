@@ -1,7 +1,7 @@
 <?php
-require_once '../Mapper/mapperHelper.php';
-require_once '../Mapper/mapperInterface.php';
-require_once '../database/dbConnection.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperHelper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperInterface.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
 
 
 /**
@@ -37,9 +37,10 @@ class UserMapper implements Mapper{
         }
         return self::$connection;
     }
-    public static function add($object){
+    public static function add($object){ # When you add a user add its builder
         $conn = UserMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
+        print_r($arrayOfAttributes);
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
             $values .= "'$value', ";        
@@ -47,6 +48,7 @@ class UserMapper implements Mapper{
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
+        echo '<br>'.$query.'<br>';
         return $conn->query($query);
     }
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
@@ -63,7 +65,7 @@ class UserMapper implements Mapper{
             echo "<br> can't update it in db <br>";
         }
         return $conn->query($query);
-}
+    }
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
         $connection = self::getDbConnection();
 

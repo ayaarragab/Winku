@@ -1,3 +1,33 @@
+<?php 
+include '../Controllers/UserControllers/UserAuthenticator.php';
+if(isset($_POST["Register"]))
+{
+	if($_POST['genderMale'])
+	{
+		$gender=0;
+	}else{
+		echo 'Female';
+		$gender=1;
+	}
+	$Rcheck = UserAuthenticator::register($_POST['name'], $_POST['Rusername'], $gender ,$_POST['email'], $_POST['Rpassword']);
+	if($Rcheck == "duplicateusername"){
+		echo "this username already taken";
+	}elseif($Rcheck == "duplicateemail"){
+		echo "you have account in this email";
+	}elseif($Rcheck == "success"){
+		echo "your account has been successfully created";
+	}elseif($Rcheck == "somethingWrong"){
+		echo "Error";
+	}elseif($Rcheck == "missingError"){
+		echo "Error: Missing or invalid input";
+	}else{
+		foreach ($arr_Err as $attr => $value) {
+			echo "<br>".$value;
+		}
+	}
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,13 +70,13 @@
 							<p>
 								Don’t use Winku Yet? <a href="#" title="">Take the tour</a> or <a href="#" title="">Join now</a>
 							</p>
-						<form method="post">
+						<form method="post" >
 							<div class="form-group">	
-							  <input type="text" id="input" required="required"/>
+							  <input type="text" id="input" required="required" name="username"/>
 							  <label class="control-label" for="input">Username</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							  <input type="password" required="required" name="password"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
@@ -55,8 +85,24 @@
 							  </label>
 							</div>
 							<a href="#" title="" class="forgot-pwd">Forgot Password?</a>
+							<?php
+							if(isset($_POST['Login']))
+							{
+								$check=Authenticator::login($_POST['username'],$_POST['password']);
+								if($check=="passError"){
+									echo "incorrect password";
+								}elseif($check=="usernameError"){
+									echo "incorrect username";
+								}elseif($check=="validError"){
+									die('Error: Missing or invalid input');
+								}else{
+									echo"something wrong";
+								}
+							}
+							?>
 							<div class="submit-btns">
-								<button class="mtr-btn signin" type="button"><span>Login</span></button>
+								<input  type = "submit" id = "submit" name = "Login" value="Login">
+								<!--<button class="mtr-btn signin" type="button"><span>Login</span></button>-->
 								<button class="mtr-btn signup" type="button"><span>Register</span></button>
 							</div>
 						</form>
@@ -68,31 +114,31 @@
 							</p>
 						<form method="post">
 							<div class="form-group">	
-							  <input type="text" required="required"/>
+							  <input type="text" required="required" name="name"/>
 							  <label class="control-label" for="input">First & Last Name</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="text" required="required"/>
+							  <input type="text" required="required" name="Rusername"/>
 							  <label class="control-label" for="input">User Name</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-group">	
-							  <input type="password" required="required"/>
+							  <input type="password" required="required" name="Rpassword"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
 							</div>
 							<div class="form-radio">
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="radio" checked="checked"/><i class="check-box"></i>Male
+								  <input type="radio" name="genderMale"/><i class="check-box"></i>Male
 								</label>
 							  </div>
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="radio"/><i class="check-box"></i>Female
+								  <input type="radio" name="genderFemale"/><i class="check-box"></i>Female
 								</label>
 							  </div>
 							</div>
 							<div class="form-group">	
-							  <input type="text" required="required"/>
+							  <input type="text" required="required" name = "email"/>
 							  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c29010d05002c">[email&#160;protected]</a></label><i class="mtrl-select"></i>
 							</div>
 							<div class="checkbox">
@@ -102,7 +148,8 @@
 							</div>
 							<a href="#" title="" class="already-have">Already have an account</a>
 							<div class="submit-btns">
-								<button class="mtr-btn signup" type="button"><span>Register</span></button>
+								<input  type = "submit" id = "submit" name = "Register" value="Register">
+								<!--<button class="mtr-btn signup" type="button"><span>Register</span></button>-->
 							</div>
 						</form>
 					</div>

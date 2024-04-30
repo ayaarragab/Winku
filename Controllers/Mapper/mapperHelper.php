@@ -5,17 +5,17 @@ class MapperHelper{
         $reflectionClass = new ReflectionClass($object);
         $methods = $reflectionClass->getMethods();
         $columnsAndValues = array();
-        foreach ($attrsArray as $attr => $value) {
+        for ($i=0; $i <count($attrsArray) ; $i++) { 
             foreach ($methods as $method) {
                 $methodName = $method->getName();
                 if (strpos($methodName, 'get') === 0 && $method->getNumberOfParameters() === 0) {
-                    if (stripos($attr, $methodName) !== false) {
-                        $columnsAndValues[$attr] = $method->invoke($object);
+                    if (stripos($methodName, $attrsArray[$i]) !== false) {
+                        $columnsAndValues[$attrsArray[$i]] = $method->invoke($object);
                         break; // Exit the inner loop once the method is found
                     }
                 }
-            }
-        }        
+            }        
+        }      
         return $columnsAndValues;
     }
 }

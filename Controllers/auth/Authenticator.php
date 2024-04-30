@@ -3,13 +3,15 @@ class Authenticator{
     public static function login($loginUsername, $loginPass){
         $loginUsername = self::checkInput($loginUsername) ;
         $loginPass = self::checkInput($loginPass);
+        echo '<br>'.$loginPass.'<br>';
         if($loginUsername && $loginPass)
         {
             $hashPassword = sha1($loginPass);
             $data1 = UserMapper::searchAttribute($loginUsername);
             if($data1)
             {
-                $data2 = UserMapper::searchAttribute($loginPass);;
+                echo $hashPassword;
+                $data2 = UserMapper::searchAttribute($hashPassword);;
                 if($data2)
                 {
                     $objArr = UserMapper::selectObjectAsArray($loginUsername, 'username');
@@ -18,7 +20,7 @@ class Authenticator{
                     $_SESSION['username'] = $objArr['username'];
                     //object
                     header('Location: ../Views/index.php');
-                }else{
+                } else {
                     return "passError";
                 }
             }else{
