@@ -1,6 +1,27 @@
 <?php
-include('assests/header.php');
-require_once '../Controllers/add_question_logic.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+	// Redirect user to landing page if not logged in
+	return header('Location: landing.php');
+}
+include_once('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Models/User.php';
+// $user=unserialize($_SESSION['user']);
+if ($_SESSION['id'] !== '') {
+	$objArr = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
+	echo'<br>';
+	$user = new User($objArr[0]['fullName'], $objArr[0]['username'], $objArr[0]['gender'], $objArr[0]['email'], $objArr[0]['password']);
+	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
+        $title = $_POST['title'];
+        $body = $_POST['body'];
+        $tags = $_POST['tags'];
+		$subcategoryId = intval($_POST['subcategoryId']);
+		echo $subcategoryId;
+        // Instantiate UserToQuestion class and call addQuestion method
+		$question =$user->userToQuestion->addQuestion($objArr[0]['username'], $title, $body, $tags, $subcategoryId);
+        }
+}
 ?>					
 	<section>
 			<div class="gap gray-bg">
@@ -32,7 +53,7 @@ require_once '../Controllers/add_question_logic.php';
 									<div class="central-meta">
 										<div class="new-postbox">
 											<div class="newpst-input">
-												<form action="index.php" method="POST">
+												<form action="" method="POST">
                                                     <h5 style="color: black; font-weight: bold;" >Write the question title</h5>
 													<textarea name="title" rows="1" style="font-size: large;" placeholder="e.g. What are the princiles of industry today?"></textarea>
                                                     <h5 style="color: black; font-weight: bold;" >Write the question body</h5>
@@ -49,7 +70,15 @@ require_once '../Controllers/add_question_logic.php';
 													</div>
 													<h5 style="color: black; font-weight: bold;" >Tags</h5>
 													<textarea name="tags" rows="1" style="font-size: large;" placeholder="e.g. #web #python #oop"></textarea>
-                                                    <button style="border-radius: 10px;" name="" class="mt-4" type="submit">Ask</button>
+													<h5 style="color: black; font-weight: bold;">Select Subcategory</h5>
+													<select name="subcategoryId">
+														<option value="1">Normal Question</option>
+														<option value="2">Mobile App Development</option>
+														<option value="3">Web Development</option>
+														<!-- Add more options for other subcategories -->
+													</select>
+
+                                                    <button style="border-radius: 10px;" name="submit" class="mt-4" type="submit">Ask</button>
 												</form>
 											</div>
 										</div>

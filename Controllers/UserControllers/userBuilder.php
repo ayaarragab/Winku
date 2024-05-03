@@ -9,14 +9,14 @@ class UserBuilder extends Person
     private $badges;
     private $reputations;
     private $suggestedCategory;
-    public function __construct($password, $gender, $fullName, $username, $email)
+    public function __construct($fullName, $username, $gender, $email, $password)
     {
         parent::__construct($fullName, $username, $gender, $email, $password);
         $this->numQuestions = 0;
-        $this->fullName = $fullName;
+        /*$this->fullName = $fullName;
         $this->username = $username;
-        $this->password = $password;
-        $this->privilgedOrNot = false;
+        $this->password = $password;*/
+        $this->privilgedOrNot = 0;
         $this->numOfReports = 0;
         $this->numOfBadges = 0;
         $this->reputations = 0;
@@ -39,7 +39,7 @@ class UserBuilder extends Person
 
     public function setSuggestedCategory($suggestedCategories)
     {
-        $this->suggestedCategories = $suggestedCategories;
+        $this->suggestedCategory = $suggestedCategories;
     }
 
     public function getNumQuestions()
@@ -82,5 +82,16 @@ class UserBuilder extends Person
     public function getNumReports()
     {
         return $this->numOfReports;
+    }
+    public function loginObject($id,$numQuestions, $privilgedOrNot, $numOfReports, $numOfBadges, $badges, $reputations, $suggestedCategory)
+    {
+        $this->setId($id);
+        $this->$numQuestions= $numQuestions;
+        $this->$privilgedOrNot= $privilgedOrNot;
+        $this->$numOfReports= $numOfReports;
+        $this->$numOfBadges=  $numOfBadges;
+        $this->$badges= $badges;
+        $this->$reputations= $reputations;
+        $this->$suggestedCategory= $suggestedCategory;
     }
 }

@@ -38,9 +38,12 @@ class UserMapper implements Mapper{
         return self::$connection;
     }
     public static function add($object){ # When you add a user add its builder
+        $columns="";
+        $values ="";
         $conn = UserMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
         print_r($arrayOfAttributes);
+        
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
             $values .= "'$value', ";        
@@ -78,9 +81,12 @@ class UserMapper implements Mapper{
             return false;
         }
     }
+
+    
+
     public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifierName;
+        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = '".$UniqueIdentifier."'";
         $result = $conn->query($sqlAtatement);
         if ($result->num_rows > 0) {
             $data = array();
@@ -92,16 +98,39 @@ class UserMapper implements Mapper{
             return false;
         }
     }
+
     public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
         $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
         if ($objectArr !== false) {
-            return $objectArr[$attrname];
+            return $objectArr[0][$attrname];
         }
         else {
             echo "couldn't find the data";
         }
     }
-    public static function searchAttribute($attributeValue) {
+
+    public static function searchAttribute($attributeValue, $attributeName) {
+        $conn = self::getDbConnection();
+        $sqlStatement = "SELECT * FROM " . self::$tableName . " WHERE " . $attributeName." = '" . $attributeValue . "'";
+        $result = $conn->query($sqlStatement);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function searchAttributeWithOther($attributeValue,$attributeName,$uniqueIdentifier, $UniqueIdentifierName) {
+        $conn = self::getDbConnection();
+        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$attributeName." = '".$attributeValue."' AND".$UniqueIdentifierName." = '".$uniqueIdentifier."'";
+        $result = $conn->query($sqlAtatement);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    /*public static function searchAttribute($attributeValue) {
         $conn = self::getDbConnection();
         $query = "SELECT * FROM " . self::$tableName;
         $result = $conn->query($query);
@@ -121,6 +150,21 @@ class UserMapper implements Mapper{
         }
     else{
         return false;
+    }*/
+
+    public static function selectAllUsers(){
+        $conn = self::getDbConnection();
+        $sqlAtatement = "SELECT * FROM ".self::$tableName;
+        $result = $conn->query($sqlAtatement);
+        if ($result->num_rows > 0) {
+            $data = array();
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+            return $data;
+        } else {
+            return false;
+        }
     }
 }
-}
+    

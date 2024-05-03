@@ -1,16 +1,46 @@
 <?php
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\userFollower\userFollower.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapper.php';
+
 class UserToUser{
-    public function reportUser($userId)
+    public function reportUser($username)
     {
-        // Add logic to report a user
+        UserControllerHelper::incrementDataDB($username,  'username','numberOfReport');
     }
 
-    public function followUser($username)
+    public function followUser($id)
     {
-        UserController::incrementData('users', 'numFollowings', $username, $this);
-        UserController::incrementDataDB('users', 'numFollowings', $username);
-        $followerId = DBMapper::retrieveSpecificAttr('users', $username, 'id');
-        $userfollower = new UserFollower($this->getId(), $followerId); // implement retrieve by username
+        UserControllerHelper::incrementData($_SESSION['id'], 'id', 'numFollowings');
+        UserControllerHelper::incrementDataDB($id,'id','numFollowers');
+        $userfollower = new UserFollower($_SESSION['id'], $id);// implement retrieve by username
+        $adding = UserMapper::add($userfollower);
+        return $adding;
     }
-    public function unfollowUser($username){}
+    public function unfollowUser($id)
+    {
+        UserControllerHelper::decreaseData($_SESSION['id'], 'id', 'numFollowings');
+        UserControllerHelper::decreaseDataDB($id,  'id','numFollowers');
+        userfollowermapper::deletesAsociationClass($id,'followerId',$_SESSION['id'],'userId');
+
+    }
+    public static function getUserFollowers($id)
+    {
+        $result =userfollowermapper::selectObjectAsArray($id,'followerId');
+        foreach ($result as $key => $value) {
+            $followers=$result[$key][$value];
+        }
+        return $followers;
+    }
+
+    public static function getUserFollowings($id)
+    {
+        $result =userfollowermapper::selectObjectAsArray($id,'$userId');
+        foreach ($result as $key => $value) {
+            $followings=$result[$key][$value];
+        }
+        return $followings;
+    }
+
+
+    
 }

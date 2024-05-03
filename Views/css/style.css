@@ -785,7 +785,6 @@ header.sticky {
     border-radius: 3px 25px 0;
     box-shadow: 0 1px 0 #e1e8ed;
     float: right;
-    margin-top: -168px;
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -803,8 +802,8 @@ header.sticky {
 .timeline-info {
     background: #fff none repeat scroll 0 0;
     display: block;
-    line-height: 59px;
-    width: 100%;
+    line-height: 74px;
+    width: 70%;
 }
 
 .timeline-info > ul {
@@ -1111,12 +1110,17 @@ header.sticky {
     bottom: 100px;
     position: absolute;
     right: 43px;
+    top: 145px;
+}
+.add-btn > span {
+    color: black;
+    margin-right: 20px;
+    /* text-shadow: 0 2px 0 #4a4a4a; */
 }
 
 .add-btn > span {
-    color: #fff;
+    color: black;
     margin-right: 20px;
-    text-shadow: 0 2px 0 #4a4a4a;
 }
 
 .add-btn > a:hover {

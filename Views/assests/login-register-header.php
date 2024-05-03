@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,24 +18,16 @@
 <!--<div class="se-pre-con"></div>-->
 <div class="theme-layout">
 	<div class="container-fluid pdng0">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="error-page">
-					<div class="bg-image" style="background-image: url(images/resources/404.jpg)"></div>
-					<div class="error-meta">
-						<h1>whoops!</h1>
-						<span>we couldn't find that page </span>
-						<a href="index-2.html" title="" data-ripple="">Go Back</a>
-					</div>
+		<div class="row merged">
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<div class="land-featurearea">
+					<div class="land-meta">
+						<div class="friend-logo">
+							<span><img src="images/wink.png" alt=""></span>
+						</div>
+						<a href="#" title="" class="folow-me">Follow Us on</a>
+					</div>	
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
-	
-	<script src="js/main.min.js"></script>
-	<script src="js/script.js"></script>
-
-</body>	
-
-</html>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+			<div class="login-reg-bg">

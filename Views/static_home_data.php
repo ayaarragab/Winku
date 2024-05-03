@@ -49,6 +49,16 @@
                             <span><i class="fa-solid fa-share-from-square"></i></span>(100)
                         </span>
                     </li>
+                    <li data-toggle="tooltip" title="upvote">
+                        <span>
+                            <span><i class="fa-solid fa-up-long"></i></span>(100)
+                        </span>
+                    </li>
+                    <li data-toggle="tooltip" title="downvote">
+                        <span>
+                            <span><i class="fa-solid fa-down-long"></i></span>(100)
+                        </span>
+                    </li>
         </ul>
         </div>
         <div class="coment-area" style="display: none;"> <!-- Answers -->
@@ -271,6 +281,16 @@
                     <li data-toggle="tooltip" title="share">
                         <span>
                             <span><i class="fa-solid fa-share-from-square"></i></span>(100)
+                        </span>
+                    </li>
+                    <li data-toggle="tooltip" title="upvote">
+                        <span>
+                            <span><i class="fa-solid fa-up-long"></i></span>(100)
+                        </span>
+                    </li>
+                    <li data-toggle="tooltip" title="downvote">
+                        <span>
+                            <span><i class="fa-solid fa-down-long"></i></span>(100)
                         </span>
                     </li>
         </ul>

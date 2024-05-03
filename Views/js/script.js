@@ -157,6 +157,9 @@ if ($.isFunction($.fn.loadMoreResults)) {
 		}
 	});	
 }
+// $('.btn-load-more').on('click', function() {
+// 	location.reload();
+// });
 	//===== owl carousel  =====//
 	if ($.isFunction($.fn.owlCarousel)) {
 		$('.sponsor-logo').owlCarousel({

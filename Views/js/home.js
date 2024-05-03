@@ -12,3 +12,4 @@ $('.fa-ellipsis-vertical').click(function() {
         optionsList.show();
     }
 });
+// please write code that make me when I click on the '.btn-load-more' button, page refreshed

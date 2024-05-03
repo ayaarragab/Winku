@@ -7,19 +7,27 @@ class Authenticator{
         if($loginUsername && $loginPass)
         {
             $hashPassword = sha1($loginPass);
-            $data1 = UserMapper::searchAttribute($loginUsername);
+            $data1 = UserMapper::searchAttribute($loginUsername,'username');
             if($data1)
             {
-                echo $hashPassword;
-                $data2 = UserMapper::searchAttribute($hashPassword);;
+                echo $hashPassword.'<br>hhhhhhh';
+                $data2 = UserMapper::searchAttribute($hashPassword,'password',$loginUsername,'uesrname');
                 if($data2)
                 {
                     $objArr = UserMapper::selectObjectAsArray($loginUsername, 'username');
+                    //print_r($objArr);
                     echo "You are logged in";
-                    $_SESSION['userId'] = $objArr['id'];
-                    $_SESSION['username'] = $objArr['username'];
-                    //object
-                    header('Location: ../Views/index.php');
+                    $userlogged=new User($objArr[0]['fullName'],$objArr[0]['username'],$objArr[0]['gender'],$objArr[0]['email'],$objArr[0]['password']);
+                    $userlogged->builder->loginObject($objArr[0]['id'], $objArr[0]['numQuestions'], $objArr[0]['privilgedOrNot'], $objArr[0]['numberOfReports'], $objArr[0]['numOfBadges'], $objArr[0]['badges'], $objArr[0]['reputations'], $objArr[0]['suggestedCategory']);
+                    //print_r($userlogged);
+                    // session_unset();
+                    session_start(); // unset all session variables
+                    session_destroy();
+                    session_start();
+                    $_SESSION['id'] = $objArr[0]['id'];
+                    $_SESSION['username'] = $objArr[0]['username'];
+                    $_SESSION['user'] = serialize($userlogged);
+                    header('Location: ..\Views\index.php');
                 } else {
                     return "passError";
                 }

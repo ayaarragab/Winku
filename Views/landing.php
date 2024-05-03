@@ -1,28 +1,23 @@
 <?php 
-include '../Controllers/UserControllers/UserAuthenticator.php';
+include_once '../Controllers/UserControllers/UserAuthenticator.php';
+$arr_Err=array("nameErr"=>"" , "usernameErr"=>"" , "emailErr"=>"" , "passErr"=>"" );
 if(isset($_POST["Register"]))
 {
-	if($_POST['genderMale'])
-	{
-		$gender=0;
-	}else{
-		echo 'Female';
-		$gender=1;
-	}
-	$Rcheck = UserAuthenticator::register($_POST['name'], $_POST['Rusername'], $gender ,$_POST['email'], $_POST['Rpassword']);
-	if($Rcheck == "duplicateusername"){
-		echo "this username already taken";
-	}elseif($Rcheck == "duplicateemail"){
-		echo "you have account in this email";
-	}elseif($Rcheck == "success"){
-		echo "your account has been successfully created";
-	}elseif($Rcheck == "somethingWrong"){
-		echo "Error";
-	}elseif($Rcheck == "missingError"){
-		echo "Error: Missing or invalid input";
-	}else{
-		foreach ($arr_Err as $attr => $value) {
-			echo "<br>".$value;
+	$arr_Err=UserAuthenticator::registerErr($_POST['name'], $_POST['Rusername'], $_POST['gender'] ,$_POST['email'], $_POST['Rpassword']);
+	if(!UserAuthenticator::valueAssociativeArr($arr_Err)){
+		$Rcheck = UserAuthenticator::register($_POST['name'], $_POST['Rusername'], $_POST['gender'] ,$_POST['email'], $_POST['Rpassword']);
+		if($Rcheck == "duplicateusername"){
+			echo "this username already taken";
+		}elseif($Rcheck == "duplicateemail"){
+			echo "you have account in this email";
+		}elseif($Rcheck == "success"){
+			echo "your account has been successfully created";
+		}elseif($Rcheck == "somethingWrong"){
+			echo "Error";
+		}elseif($Rcheck == "missingError"){
+			echo "Error: Missing or invalid input";
+		}else{
+			print_r($Rcheck);
 		}
 	}
 }
@@ -116,30 +111,34 @@ if(isset($_POST["Register"]))
 							<div class="form-group">	
 							  <input type="text" required="required" name="name"/>
 							  <label class="control-label" for="input">First & Last Name</label><i class="mtrl-select"></i>
+							  <span><?php echo $arr_Err['nameErr']; ?></span>
 							</div>
 							<div class="form-group">	
 							  <input type="text" required="required" name="Rusername"/>
 							  <label class="control-label" for="input">User Name</label><i class="mtrl-select"></i>
+							  <span> <?php echo $arr_Err['usernameErr']; ?></span>
 							</div>
 							<div class="form-group">	
 							  <input type="password" required="required" name="Rpassword"/>
 							  <label class="control-label" for="input">Password</label><i class="mtrl-select"></i>
+							  <span> <?php echo $arr_Err['passErr']; ?></span>
 							</div>
 							<div class="form-radio">
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="genderMale"/><i class="check-box"></i>Male
+								  <input type="radio" name="gender" value= "no" checked="checked"/><i class="check-box"></i>Male
 								</label>
 							  </div>
 							  <div class="radio">
 								<label>
-								  <input type="radio" name="genderFemale"/><i class="check-box"></i>Female
+								  <input type="radio" name="gender" value= "yes"/><i class="check-box"></i>Female
 								</label>
 							  </div>
 							</div>
 							<div class="form-group">	
 							  <input type="text" required="required" name = "email"/>
 							  <label class="control-label" for="input"><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6c29010d05002c">[email&#160;protected]</a></label><i class="mtrl-select"></i>
+								<span> <?php echo $arr_Err['emailErr']; ?></span>
 							</div>
 							<div class="checkbox">
 							  <label>

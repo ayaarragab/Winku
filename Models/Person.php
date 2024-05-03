@@ -13,7 +13,7 @@ class Person{
     private $bio;
     private $country;
     private $professionalTitle;
-    public function __construct($gender, $username, $email, $password, $fullName) {
+    public function __construct($fullName, $username, $gender, $email, $password) {
         $this->gender = $gender;
         $this->fullName = $fullName;
         $this->username = $username;
@@ -27,108 +27,110 @@ class Person{
         $this->country = 'no country specified yet';
         $this->professionalTitle = 'no title specified yet';
     }
-    public function getid(): int {
+    public function getid(){
         return $this->id;
     }
 
-    public function setId(int $id): void {
+    public function setId($id){
         $this->id = $id;
     }
 
-    public function getgender(): string {
+    public function getgender(){
         return $this->gender;
     }
 
-    public function setgender(string $gender): void {
+    public function setgender($gender){
         $this->gender = $gender;
     }
 
-    public function getfullName(): string {
+    public function getfullName(){
         return $this->fullName;
     }
 
-    public function setfullName(string $fullName): void {
+    public function setfullName($fullName){
         $this->fullName = $fullName;
     }
 
 
-    public function getusername(): string {
+    public function getusername(){
         return $this->username;
     }
 
-    public function setusername(string $username): void {
+    public function setusername($username){
         $this->username = $username;
     }
 
-    public function getemail(): string {
+    public function getemail() {
         return $this->email;
     }
 
-    public function setEmail(string $email): void {
+    public function setEmail($email){
         $this->email = $email;
     }
 
-    public function getpassword(): string {
+    public function getpassword(){
         return $this->password;
     }
 
-    public function setPassword(string $password): void {
+    public function setPassword( $password) {
         $this->password = $password;
     }
 
-    public function getnumAnswers(): int {
+    public function getnumAnswers(){
         return $this->numAnswers;
     }
 
-    public function setNumAnswers(int $numAnswers): void {
+    public function setNumAnswers( $numAnswers){
         $this->numAnswers = $numAnswers;
     }
 
-    public function getnumFollowers(): int {
-        return $this->numFollowers;
+    public function getnumFollowers($id){
+        $result =userfollowermapper::numOfRow($id,'followerId');
+        return $result;
     }
 
-    public function setnumFollowers(int $numFollowers): void {
+    public function setnumFollowers($numFollowers) {
         $this->numFollowers = $numFollowers;
     }
 
-    public function getnumFollowings(): int {
-        return $this->numFollowings;
+    public function getnumFollowings($id){
+        $result =userfollowermapper::numOfRow($id,'userId');
+        return $result;
     }
 
-    public function setnumFollowings(int $numFollowings): void {
+    public function setnumFollowings($numFollowings) {
         $this->numFollowings = $numFollowings;
     }
 
-    public function getprofilePhoto(): string {
+    public function getprofilePhoto(){
         return $this->profilePhoto;
     }
 
-    public function setprofilePhoto(string $profilePhoto): void {
+    public function setprofilePhoto($profilePhoto){
         $this->profilePhoto = $profilePhoto;
     }
 
-    public function getbio(): string {
+    public function getbio() {
         return $this->bio;
     }
 
-    public function setBio(string $bio): void {
+    public function setBio( $bio){
         $this->bio = $bio;
     }
 
-    public function getcountry(): string {
+    public function getcountry(){
         return $this->country;
     }
 
-    public function setCountry(string $country): void {
+    public function setCountry($country){
         $this->country = $country;
     }
 
-    public function getprofessionalTitle(): string {
+    public function getprofessionalTitle() {
         return $this->professionalTitle;
     }
 
-    public function setProfessionalTitle(string $professionalTitle): void {
+    public function setProfessionalTitle( $professionalTitle){
         $this->professionalTitle = $professionalTitle;
     }
     // public function AnswerQuestion($questionId, $answerContent): bool {

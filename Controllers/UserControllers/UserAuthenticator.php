@@ -5,75 +5,79 @@ require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Mode
 class UserAuthenticator extends Authenticator{
     public static function valueAssociativeArr($arr)
     {
-        $allNull = true;
+        $allNull = 0;
         foreach ($arr as $attr => $value) {
-            if ($value !== null) {
-                $allNull = false;
-                break;
+            if ($value == null) {
+                $allNull++;
             }
         }
         return $allNull;
     }
-    public static function register($Rname , $Remail , $Rgender , $Rusername, $Rpass)
+    public static function registerErr($Rname , $Rusername , $Rgender ,$Remail , $Rpass)
     {
-            $arr_Err=array("nameErr"=>"" , "usernameErr"=>"" , "emailErr"=>"" , "passErr"=>"" );
-            if(empty($Rname ))
+        $arr_Err=array("nameErr"=>"" , "usernameErr"=>"" , "emailErr"=>"" , "passErr"=>"" );
+        if(empty($Rname ))
+        {
+            $arr_Err["nameErr"]="* Name is requird";
+        }else{
+            $Rname = self::checkInput($Rname );
+            if(!preg_match("/^[a-zA-Z-' ]*$/",$Rname))
             {
-                $arr_Err["nameErr"]="* Name is requird";
-            }else{
-                $Rname = self::checkInput($Rname );
-                if(!preg_match("/^[a-zA-Z-' ]*$/",$Rname))
+                $arr_Err["nameErr"] = "* Only letters and white space allowed";
+            }
+        }
+
+        if(empty($Rusername))
+        {
+            $arr_Err["usernameErr"]="* Username is requird";
+        }
+
+        if(empty($Remail)){
+            $arr_Err["emailErr"] = "* Email is required";
+        }elseif(!filter_var( self::checkInput($Remail) , FILTER_VALIDATE_EMAIL)){
+            $arr_Err["emailErr"] = "* Invalid email format";
+        }
+
+
+        if(empty($Rpass)){
+            $arr_Err["passErr"] = "* Password is required";
+        }else{
+            if(strlen($Rpass)<8){
+                $arr_Err["passErr"] = "* It is too short";
+            }elseif(!empty($Remail))
+            {
+                $emailParts = explode('@', $Remail);
+                $password = self::checkinput($Rpass);
+                $hashp = password_hash($password,PASSWORD_DEFAULT);
+                if($emailParts[0]==$Rpass)
                 {
-                    $arr_Err["nameErr"] = "* Only letters and white space allowed";
+                    $arr_Err["passErr"] = "* Error: Password cannot be the same as the email address.";
+                }elseif (!password_verify($password,$hashp)) {
+                    $arr_Err["passErr"] = "* Invalid password";
                 }
             }
-
-            if(empty($Rusername))
-            {
-                $arr_Err["usernameErr"]="* Username is requird";
-            }
-
-            if(empty($Remail)){
-                $arr_Err["emailErr"] = "* Email is required";
-            }elseif(!filter_var( self::checkInput($Remail) , FILTER_VALIDATE_EMAIL)){
-                $arr_Err["emailErr"] = "* Invalid email format";
-            }
-
-
-            if(empty($Rpass)){
-                $arr_Err["passErr"] = "* Password is required";
-            }else{
-                if(strlen($Rpass)<8){
-                    $arr_Err["passErr"] = "* It is too short";
-                }elseif(!empty($Remail))
-                {
-                    $emailParts = explode('@', $Remail);
-                    $password = self::checkinput($Rpass);
-                    $hashp = password_hash($password,PASSWORD_DEFAULT);
-                    if($emailParts[0]==$Rpass)
-                    {
-                        $arr_Err["passErr"] = "* Error: Password cannot be the same as the email address.";
-                    }elseif (!password_verify($password,$hashp)) {
-                        $arr_Err["passErr"] = "* Invalid password";
-                    }
-                }
-}
-        if(!self::valueAssociativeArr($arr_Err)){
+        }
+            return $arr_Err;
+    }
+    public static function register($Rname , $Rusername , $Rgender ,$Remail , $Rpass)
+    {
+        if($Rgender=='no')
+		{
+			$Rgender=0;
+		}elseif($_POST['gender']=='yes'){
+			
+			$Rgender=1;
+		}
             $Rname =  self::checkInput($Rname);
             $Remail = self::checkInput($Remail);
             $Rpass = self::checkInput($Rpass);
             $Rpass = sha1($Rpass);
             $Rusername = self::checkInput($Rusername);
             if($Rname && $Remail && $Rpass && $Rusername){
-                if (isset($_POST['genderMale'])) {
-                    $Rgender = 0;
-                } elseif(isset($_POST['genderFemale'])) {
-                    $Rgender = 1;
-                }
                 // my edit -Aya-
                 
-                $isduplicateEamil = UserMapper::searchAttribute($Remail);
-                $isduplicateName = UserMapper::searchAttribute($Rusername);
+                $isduplicateEamil = UserMapper::searchAttribute($Remail,'email');
+                $isduplicateName = UserMapper::searchAttribute($Rusername,'username');
                 if ($isduplicateEamil) {
                     echo 'duplicate email';
                 }
@@ -92,9 +96,5 @@ class UserAuthenticator extends Authenticator{
             }else{
                 return "missingError";
             }
-        }else {
-            return $arr_Err;
-        }
-
     }
 }

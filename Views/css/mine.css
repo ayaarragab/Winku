@@ -33,3 +33,11 @@
 .title-and-ellipse i{
     cursor: pointer;
 }
+/* User Profile */
+.add-f{
+    background-color: #088dcd !important;
+    color: #f1f1f1;
+}
+.add-btn{
+    cursor: pointer !important;
+}
