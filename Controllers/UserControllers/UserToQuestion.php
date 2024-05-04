@@ -20,7 +20,6 @@ class UserToQuestion{
 
           // Check if question was added successfully
           if ($result) {
-              echo "Question added successfully";
               UserControllerHelper::incrementData($_SESSION['username'],'username','numQuestions');
 
               echo $result; // Assuming $result contains some identifier of the added question

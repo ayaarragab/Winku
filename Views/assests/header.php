@@ -137,7 +137,7 @@
 							<a href="forum.php" title="">Categroies</a>
 						</li>
 						<li>
-							<a href="user-profile.php" title="">Profile</a>
+							<a href="user-profile.php?=<?php echo $_SESSION['id']; ?>" title="">Profile</a>
 						</li>
 						<li>
 							<a href="add-question.php" title=""

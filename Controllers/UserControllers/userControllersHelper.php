@@ -7,7 +7,7 @@ class UserControllerHelper
         $value = intval(UserMapper::selectSpecificAttr($uniqueIdentifier ,$UniqueIdentifierName, $columnName));
         if (is_int($value)) {
             UserMapper::edit($uniqueIdentifier, array($columnName => ++$value),$UniqueIdentifierName);
-            call_user_func([$object, 'set'.$columnName], $value);
+            call_user_func([$object->builder, 'set'.ucfirst($columnName)], $value);
             $_SESSION['user']=serialize($object);
         }
         else {

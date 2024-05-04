@@ -1,11 +1,14 @@
 <?php
-include('assests/header.php')
+include_once('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/questionControllers/questionToUser.php';
+$user = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
 ?>
 	<section>
   
 		<div class="feature-photo">
 			<div class="add-btn">
-				<span>1205 followers</span>
+			<span><?php echo $user[0]['numFollowers']; ?></span>
         <form class="d-inline" action="" method="post">
           <input class="add-f btn" type="submit" name="follow" value="follow" />
         </form>
@@ -397,7 +400,7 @@ include('assests/header.php')
 										  </div>
 										</div>
 									</div>
-								</div>                            </div>
+							</div>                            </div>
                             <!-- centerl meta -->
 							<div class="col-lg-3">
 								<aside class="sidebar static">

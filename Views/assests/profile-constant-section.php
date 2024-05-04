@@ -2,8 +2,8 @@
 						<div class="timeline-info">
 							<ul>
 								<li class="admin-name">
-								  <h5 style="m-0">Janice Griffith</h5>
-                  <h6>Technical lead in Google</h6>
+								  <h5 style="m-0"><?php echo $user[0]['username']; ?></h5>
+                  <h6><?php echo $user[0]['professionalTitle']; ?></h6>
 								</li>
 								<li>
 									<a class="active" href="user-profile.php" title="" data-ripple="">Questions</a>

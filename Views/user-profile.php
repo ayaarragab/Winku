@@ -1,11 +1,14 @@
 <?php
-include('assests/header.php')
+session_start();
+include_once('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/questionControllers/questionToUser.php';
+$user = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
 ?>
 	<section>
-  
 		<div class="feature-photo">
 			<div class="add-btn">
-				<span>1205 followers</span>
+				<span><?php echo $user[0]['numFollowers']; ?></span>
         <form class="d-inline" action="" method="post">
           <input class="add-f btn" type="submit" name="follow" value="follow" />
         </form>
@@ -15,11 +18,10 @@ include('assests/header.php')
 					<div class="col-lg-2 col-sm-3">
 						<div class="user-avatar">
 							<figure>
-								<img src="images/resources/user-avatar.jpg" alt="">
+								<img src="<?php echo $user[0]['profilePhoto']; ?>" alt="">
 								<form class="edit-phto">
 									<i class="fa fa-camera-retro"></i>
 									<label class="fileContainer">
-										Edit Display Photo
 										<input type="file"/>
 									</label>
 								</form>
@@ -169,7 +171,7 @@ include('assests/header.php')
 							<div class="col-lg-6">
 								<div class="loadMore">
                                 <h3 style="color: black; font-weight: bold;" >Here're all your published questions!</h3>
-<?php require_once 'static_home_data.php' ?>
+<?php questionToUser::showQuestionsPerUser($user[0]['username']) ?>
 								</div>
 							</div><!-- centerl meta -->
 							<div class="col-lg-3">

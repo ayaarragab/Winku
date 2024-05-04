@@ -61,7 +61,7 @@ class UserMapper implements Mapper{
             $set .= "$column = '$value', ";
         }
         $set = rtrim($set, ", ");
-        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
+        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = '".$uniqueIdentifier."'";
         if ($query)
             echo "<br> data changed sucessfully! <br>";
         else {

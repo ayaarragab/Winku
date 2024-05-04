@@ -33,7 +33,6 @@ class QuestionMapper implements Mapper{
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        echo '<br>'.$query.'<br>';
         return $conn->query($query);
     }
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
@@ -44,11 +43,11 @@ class QuestionMapper implements Mapper{
         }
         $set = rtrim($set, ", ");
         $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
-        if ($query)
-            echo "<br> data changed sucessfully! <br>";
-        else {
-            echo "<br> can't update it in db <br>";
-        }
+        // if ($query)
+        //     echo "<br> data changed sucessfully! <br>";
+        // else {
+        //     echo "<br> can't update it in db <br>";
+        // }
         return $conn->query($query);
     }
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
@@ -72,7 +71,7 @@ class QuestionMapper implements Mapper{
     }
     public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifier;
+        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = '".$UniqueIdentifier."'";
         $result = $conn->query($sqlAtatement);
         if ($result->num_rows > 0) {
             $data = array();

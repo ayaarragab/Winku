@@ -27,7 +27,7 @@ class Person{
         $this->country = 'no country specified yet';
         $this->professionalTitle = 'no title specified yet';
     }
-    public function getid(){
+    public function getId(){
         return $this->id;
     }
 
@@ -35,7 +35,7 @@ class Person{
         $this->id = $id;
     }
 
-    public function getgender(){
+    public function getGender(){
         return $this->gender;
     }
 
@@ -43,7 +43,7 @@ class Person{
         $this->gender = $gender;
     }
 
-    public function getfullName(){
+    public function getFullName(){
         return $this->fullName;
     }
 
@@ -52,7 +52,7 @@ class Person{
     }
 
 
-    public function getusername(){
+    public function getUsername(){
         return $this->username;
     }
 
@@ -60,7 +60,7 @@ class Person{
         $this->username = $username;
     }
 
-    public function getemail() {
+    public function getEmail() {
         return $this->email;
     }
 
@@ -68,7 +68,7 @@ class Person{
         $this->email = $email;
     }
 
-    public function getpassword(){
+    public function getPassword(){
         return $this->password;
     }
 
@@ -76,7 +76,7 @@ class Person{
         $this->password = $password;
     }
 
-    public function getnumAnswers(){
+    public function getNumAnswers(){
         return $this->numAnswers;
     }
 
@@ -84,7 +84,7 @@ class Person{
         $this->numAnswers = $numAnswers;
     }
 
-    public function getnumFollowers($id){
+    public function getNumFollowers($id){
         $result =userfollowermapper::numOfRow($id,'followerId');
         return $result;
     }
@@ -93,16 +93,16 @@ class Person{
         $this->numFollowers = $numFollowers;
     }
 
-    public function getnumFollowings($id){
+    public function getNumFollowings($id){
         $result =userfollowermapper::numOfRow($id,'userId');
         return $result;
     }
 
-    public function setnumFollowings($numFollowings) {
+    public function setNumFollowings($numFollowings) {
         $this->numFollowings = $numFollowings;
     }
 
-    public function getprofilePhoto(){
+    public function getProfilePhoto(){
         return $this->profilePhoto;
     }
 
@@ -110,7 +110,7 @@ class Person{
         $this->profilePhoto = $profilePhoto;
     }
 
-    public function getbio() {
+    public function getBio() {
         return $this->bio;
     }
 
@@ -118,7 +118,7 @@ class Person{
         $this->bio = $bio;
     }
 
-    public function getcountry(){
+    public function getCountry(){
         return $this->country;
     }
 
@@ -126,7 +126,7 @@ class Person{
         $this->country = $country;
     }
 
-    public function getprofessionalTitle() {
+    public function getProfessionalTitle() {
         return $this->professionalTitle;
     }
 

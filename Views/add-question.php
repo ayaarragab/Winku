@@ -10,14 +10,12 @@ require_once '../Models/User.php';
 // $user=unserialize($_SESSION['user']);
 if ($_SESSION['id'] !== '') {
 	$objArr = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
-	echo'<br>';
 	$user = new User($objArr[0]['fullName'], $objArr[0]['username'], $objArr[0]['gender'], $objArr[0]['email'], $objArr[0]['password']);
 	if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $title = $_POST['title'];
         $body = $_POST['body'];
         $tags = $_POST['tags'];
 		$subcategoryId = intval($_POST['subcategoryId']);
-		echo $subcategoryId;
         // Instantiate UserToQuestion class and call addQuestion method
 		$question =$user->userToQuestion->addQuestion($objArr[0]['username'], $title, $body, $tags, $subcategoryId);
         }
