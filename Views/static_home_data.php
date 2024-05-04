@@ -1,7 +1,7 @@
 <div class="central-meta item"> <!-- Questions -->
     <div class="user-post">
         <div class="title-and-ellipse d-flex ">
-            <a href="question_detail.php"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are common interview questions for software engineering roles, and how can I best prepare to succeed?</h5></a>
+            <a href="question_detail.php?id=<?php echo $id ?>"><h5 style="font-weight: bold; width: 70%; color: rgb(45, 45, 45); font-size: 1.6rem;">What are common interview questions for software engineering roles, and how can I best prepare to succeed?</h5></a>
             <i id="ellipse-element" class="fa-solid fa-ellipsis-vertical cursor-pointer" style="font-size:30px; margin-top:2px"></i>
         </div>
         <div class="d-flex ff">

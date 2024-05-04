@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('assests/header.php');
+require_once 'assests/header.php';
 require_once '../Controllers/questionControllers/questionToUser.php';
 ?>		<section>
 			<div class="gap gray-bg">

@@ -12,4 +12,40 @@ $('.fa-ellipsis-vertical').click(function() {
         optionsList.show();
     }
 });
-// please write code that make me when I click on the '.btn-load-more' button, page refreshed
+
+async function increaseReacts(questionId) {
+    const apiUrl = `http://localhost/software-engineering-project-updated/codebase/Controllers/api/questionReacts/questionReacts.php?id=${parseInt(questionId)}`;
+    const response = await fetch(apiUrl);
+    const jsonData = await response.json();
+    console.log(jsonData);
+    // const content = document.querySelector('.products .carousel-inner');
+    // let htmlcontent = ``;
+}
+async function decreaseReacts(questionId) {
+    const apiUrl = `http://localhost/software-engineering-project-updated/codebase/Controllers/api/questionReacts/questionReacts.php?id=${parseInt(questionId)}`;
+    const response = await fetch(apiUrl);
+    const jsonData = await response.json();
+    console.log(jsonData);
+    // const content = document.querySelector('.products .carousel-inner');
+    // let htmlcontent = ``;
+}
+
+async function ViewNumAnswers(questionId) {
+    const apiUrl = `http://localhost/software-engineering-project-updated/codebase/Controllers/api/questionReacts/questionReacts.php?id=${parseInt(questionId)}`;
+    const response = await fetch(apiUrl);
+    const jsonData = await response.json();
+    console.log(jsonData);
+    // const content = document.querySelector('.products .carousel-inner');
+    // let htmlcontent = ``;
+}
+// const questions = document.getElementsByClassName('to-select-in-js');
+// for (let index = 0; index < questions.length; index++) {
+//     const question = questions[index];
+//     question.addEventListener('click', function(){
+//         console.log(question);
+//         console.log('debugggg');
+//         const questionId = this.dataset.id;
+//         console.log(questionId);
+//         increaseOrDecreaseReacts(questionId);
+//     });
+// }

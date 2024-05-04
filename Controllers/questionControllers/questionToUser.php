@@ -1,10 +1,12 @@
 <?php
 require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\questionControllers\questionMapper.php';
-class questionToUser{
-    public static function showAllQuestions(){
+class questionToUser
+{
+    public static function showAllQuestions()
+    {
 
         $questions = QuestionMapper::selectAllQuestions();
-        for ($i=count($questions) - 1; $i >= 0; $i--) { 
+        for ($i = count($questions) - 1; $i >= 0; $i--) {
             echo '<div class="central-meta item"> <!-- Questions -->';
             echo '<div class="user-post">';
             echo '<div class="title-and-ellipse d-flex">';
@@ -33,14 +35,15 @@ class questionToUser{
             echo '<ul>';
             echo '<li data-toggle="tooltip" title="downvote"><span><span><i class="fa-solid fa-down-long"></i></span>' . $questions[$i]['numDownVotes'] . '</span></li>';
             echo '<li data-toggle="tooltip" title="upvote"><span><span><i class="fa-solid fa-up-long"></i></span>' . $questions[$i]['numUpVotes'] . '</span></li>';
-            echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>'. $questions[$i]['numAnswers'] .'</span></li>';
+            echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>' . $questions[$i]['numAnswers'] . '</span></li>';
             echo '</ul>';
             echo '</div>';
             echo '</div>';
             echo '</div>';
         }
     }
-    public static function showOneQuestion($id){
+    public static function showOneQuestion($id)
+    {
         $question = QuestionMapper::selectObjectAsArray($id, 'id');
         echo '
         <div class="central-meta item"> <!-- Questions -->
@@ -67,12 +70,32 @@ class questionToUser{
                     <p style="font-size: 0.99rem;" >' . $question[0]['body'] . '</p>
                 </div>
                 <div class="we-video-info mb-3">';
-                echo '<ul>';
-                echo '<li data-toggle="tooltip" title="downvote"><span><span><i class="fa-solid fa-down-long"></i></span>' . $question[0]['numDownVotes'] . '</span></li>';
-                echo '<li data-toggle="tooltip" title="upvote"><span><span><i class="fa-solid fa-up-long"></i></span>' . $question[0]['numUpVotes'] . '</span></li>';
-                echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>'. $question[0]['numAnswers'] .'</span></li>';
-                echo '</ul>';
-                echo '</div>
+        echo '<ul>';
+
+
+        //downVote
+        // echo '<li data-toggle="tooltip" title="downvote"><span><span><i class="fa-solid fa-down-long"></i></span>' . $question[0]['numDownVotes'] . '</span></li>';
+        echo '<a class="to-select-in-js" data-id=' . $question[0]['id'] . "'";
+        echo ' onclick="' . 'decreaseReacts' . '(' . $question[0]['id'] . ')' . '">';
+        echo '<li data-toggle="tooltip" title="downvote"><span><span><i class="fa-solid fa-down-long"></i></span>';
+        echo $question[0]['numDownVotes'] . '</span></li>'; //Ask Sara about the increment and decrement functions, will be replaced with code in JS
+
+        //upVote
+        // echo '<li data-toggle="tooltip" title="upvote"><span><span><i class="fa-solid fa-up-long"></i></span>' . $question[0]['numUpVotes'] . '</span></li>';
+        echo '<a class="to-select-in-js" data-id=' . $question[0]['id'] . "'";
+        echo ' onclick="' . 'increaseReacts' . '(' . $question[0]['id'] . ')' . '">';
+        echo '<li data-toggle="tooltip" title="upvote"><span><span><i class="fa-solid fa-down-long"></i></span>';
+        echo $question[0]['numUpVotes'] . '</span></li>'; //will be replaced with code in JS
+
+        //numAnswers
+        echo '<a class="to-select-in-js" data-id=' . $question[0]['id'] . "'";
+        echo ' onclick="' . 'ViewNumAnswers' . '(' . $question[0]['id'] . ')' . '">';
+        echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>';
+        echo $question[0]['numAnswers'] . '</span></li>'; //will be replaced with code in JS
+
+
+        echo '</ul>';
+        echo '</div>
                 <div class="coment-area"> <!-- Answers -->
                     <ul class="we-comet">
     
@@ -103,11 +126,12 @@ class questionToUser{
                 </div>
             </div>
         </div>';
-}
-    public static function showQuestionsPerUser($username){
+    }
+    public static function showQuestionsPerUser($username)
+    {
 
         $questions = QuestionMapper::selectObjectAsArray($username, 'username');
-        for ($i=count($questions) - 1; $i >= 0; $i--) { 
+        for ($i = count($questions) - 1; $i >= 0; $i--) {
 
             echo '<div class="central-meta item"> <!-- Questions -->';
             echo '<div class="user-post">';
@@ -137,11 +161,12 @@ class questionToUser{
             echo '<ul>';
             echo '<li data-toggle="tooltip" title="downvote"><span><span><i class="fa-solid fa-down-long"></i></span>' . $questions[$i]['numDownVotes'] . '</span></li>';
             echo '<li data-toggle="tooltip" title="upvote"><span><span><i class="fa-solid fa-up-long"></i></span>' . $questions[$i]['numUpVotes'] . '</span></li>';
-            echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>'. $questions[$i]['numAnswers'] .'</span></li>';
+            echo '<li><span class="comment" data-toggle="tooltip" title="Answers"><span><i class="fa-solid fa-pen-to-square"></i></span>' . $questions[$i]['numAnswers'] . '</span></li>';
             echo '</ul>';
             echo '</div>';
             echo '</div>';
-            echo '</div>';        
+            echo '</div>';
         }
     }
+    public static function showAllQuestionsToAdmin(){}
 }
