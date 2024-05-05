@@ -1,5 +1,6 @@
 <?php
-include('assests/header.php')
+session_start();
+include_once('assests/header.php');
 ?>	
 	<section>
 		<div class="gap100">
@@ -9,7 +10,7 @@ include('assests/header.php')
 						<div class="forum-warper">
 							<div class="post-filter-sec">
 								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search subcategory">
+									<input type="post" placeholder="Search category">
 									<button><i class="ti-search"></i></button>
 								</form>
 								<div class="purify">
@@ -23,57 +24,43 @@ include('assests/header.php')
 									<a href="#" title="">purify</a>
 								</div>
 							</div>
+							<?php if (isset($_SESSION['id'])) {
+								echo '<a class="addnewforum" style="" href="be_a_privileged_user.php" title=""><i class="fa fa-plus"></i> Be a priviliged user</a>';
+								// show this if privileged
+								// <a class="addnewforum" style="display:none" href="forum-create-topic.php" title=""><i class="fa fa-plus"></i> Add a new category</a>
+							}?>
+							
 						</div>
-						<h3 style="color: black; font-weight: bold;" >Subcategories</h3>
 						<div class="forum-list">
-							<table class="table table-responsive">
-								<thead>
-									<tr>
-										<th scope="col">subcategories</th>
-										<th scope="col">Questions</th>
-										<th scope="col">Answers</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<i class="fa fa-comments"></i> 
-											<a href="forum-open-topic.html" title="">Custom CSS Tweaks</a>
-											<h6>Started by: <a href="#" title="">Karly King</a></h6>
-										</td>
-										<td>7</td>
-										<td>2</td>
-									</tr>
-									<tr>
-										<td>
-											<i class="fa fa-comments"></i> 
-											<a href="forum-open-topic.html" title="">Free Photography on photodune</a>
-											<h6>Started by: <a href="#" title="">Peter Phillips</a></h6>
-										</td>
-										<td>9</td>
-										<td>2</td>
-									</tr>
-									<tr>
-										<td>
-											<i class="fa fa-comments"></i> 
-											<a href="forum-open-topic.html" title="">Free videos on video hive</a>
-											<h6>Started by: <a href="#" title="">Joseph Johnson</a></h6>
-										</td>
-										<td>4</td>
-										<td>5</td>
-									</tr>
-									<tr>
-										<td>
-											<i class="fa fa-comments"></i> 
-											<a href="forum-open-topic.html" title="">Freebees themes on themeforest</a>
-											<h6>Started by: <a href="#" title="">Joseph Johnson</a></h6>
-										</td>
-										<td>3</td>
-										<td>1</td>
-									</tr>
-								</tbody>
-							</table>
+    <h3 style="color: black; font-weight: bold;">Categories</h3>
+    <table class="table table-responsive">
+        <thead>
+            <tr>
+                <th scope="col">Categories</th>
+                <th scope="col">Subcategories</th>
+                <th scope="col">Questions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Repeat this block for each category -->
+            <tr>
+                <td>
+					<div class="catName-and-follow-button d-flex m-0 p-0">
+						<a href="subcategories.php?categoryId=<?php #$category['id'] ?>" title="">Mobile App Development</a>
+						<a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">Follow</span></a>
+						<a class="addnewforum p-1 follow-cat d-none"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">Unfollow</span></a>
+					</div>
+                    <p class="p-0 m-0" >list your recommended website and when you start to create your website so please check your laptop window and battery &#58;-&#41;</p>
+                </td>
+                <td>4</td>
+                <td>5</td>
+            </tr>
+            <!-- End of category block -->
+            <!-- Repeat similar blocks for other categories -->
+        </tbody>
+    </table>
 						</div>
+
 					</div>
 					<div class="col-lg-3">
 						<aside class="sidebar full-style">
@@ -171,6 +158,6 @@ include('assests/header.php')
 			<a href="#" title="">Sign up</a>
 		</div>
 	</section>
-<?php
+	<?php
 include('assests/footer.php')
-?>
+?>	

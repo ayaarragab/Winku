@@ -1,9 +1,5 @@
-<?php
-session_start();
-include_once('assests/header.php');
-require_once '../Controllers/questionControllers/questionToUser.php';
-?>	
-		<section>
+<?php include_once('assests/header.php'); ?>
+<section>
 			<div class="gap gray-bg">
 				<div class="container-fluid">
 					<div class="row">
@@ -28,25 +24,29 @@ require_once '../Controllers/questionControllers/questionToUser.php';
 										</div><!-- Shortcuts -->										
 									</aside>
 								</div><!-- sidebar -->
-								<div class="col-lg-6">
-									<div class="loadMore">
-										<?php
-										if (isset( $_SESSION['id']) && $_SESSION['id'] == $_GET['id']) {
-											questionToUser::showOneQuestion($_GET['id'], true);
-										}
-										else {
-											questionToUser::showOneQuestion($_GET['id'], false);
-										}
-										 ?>
+								<div class="col-lg-6 ask">
+                                    <h3 style="color: black; font-weight: bold;" >Be a privileged User!</h3>
+									<div class="central-meta">
+										<div class="new-postbox">
+											<div class="newpst-input">
+												<form action="" method="POST">
+                                                    <h5 style="color: black; font-weight: bold;" >Please write your professional email:</h5>
+													<textarea  name="body" rows="1" style="font-size: large;" placeholder="JSmith@google.com"></textarea>
+                                                    <button style="border-radius: 10px;" name="submit" class="mt-4" type="submit">Verify</button>
+												</form>
+											</div>
+										</div>
+									</div><!-- add post new box -->
 								</div>
 								<div class="col-lg-3"></div>
 								</div><!-- centerl meta -->
 							</div>	
 						</div>
 					</div>
-				</div>
-			</div>	
-		</section>
+			</div>
+	
+	</section>
+
 <?php
 include('assests/footer.php')
-?>	
+?>

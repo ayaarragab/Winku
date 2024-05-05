@@ -30,7 +30,12 @@ require_once '../Controllers/questionControllers/questionToUser.php';
 								<div class="col-lg-6">
 									<div class="loadMore">
 									<h3 style="color: black; font-weight: bold;" >Top Questions</h3>
-									<?php questionToUser::showAllQuestions() ?>
+									<?php if (isset($_SESSION['username'])) {
+											questionToUser::showAllQuestions($_SESSION['username']);
+									}
+									else {
+										questionToUser::showAllQuestions(false);
+									} ?>
 									</div>
 								</div>
 								<div class="col-lg-3"></div><!-- centerl meta -->

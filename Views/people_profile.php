@@ -3,12 +3,17 @@ session_start();
 include_once('assests/header.php');
 require_once '../Controllers/UserControllers/userMapper.php';
 require_once '../Controllers/questionControllers/questionToUser.php';
-$user = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
+if (isset($_GET['id'])) {
+    $user = UserMapper::selectObjectAsArray($_GET['id'], 'id');
+}
 ?>
 	<section>
 		<div class="feature-photo">
 			<div class="add-btn">
-				<span>Followers: <?php echo $user[0]['numFollowers']; ?></span>
+				<span><?php echo $user[0]['numFollowers']; ?></span>
+        <form class="d-inline" action="" method="post">
+          <input class="add-f btn" type="submit" name="follow" value="follow" />
+        </form>
       </div>
 			<div class="container-fluid">
 				<div class="row merged">

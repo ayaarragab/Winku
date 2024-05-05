@@ -125,13 +125,13 @@
 		<div class="topbar stick">
 			<div class="container">
 			<div class="logo">
-				<a title="" href="index.php"><img src="images/logo.png" alt=""></a>
+				<a title="" href="admin_dashboard.php"><img src="images/logo.png" alt=""></a>
 			</div>
 			
 			<div class="top-area">
 				<ul class="main-menu">
 					<li>
-						<a href="admin-home-page.php" title="">Questions</a>
+						<a href="admin-all-questions.php" title="">Questions</a>
 					</li>
 					<li>
 						<a href="admin-all-categories.php" title="">Categroies</a>

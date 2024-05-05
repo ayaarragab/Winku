@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once('assests/header.php');
-require_once '../Controllers/questionControllers/questionToUser.php';
+require_once '../Controllers/questionControllers/questionToAdmin.php';
 ?>	
 		<section>
 			<div class="gap gray-bg">
@@ -30,14 +30,7 @@ require_once '../Controllers/questionControllers/questionToUser.php';
 								</div><!-- sidebar -->
 								<div class="col-lg-6">
 									<div class="loadMore">
-										<?php
-										if (isset( $_SESSION['id']) && $_SESSION['id'] == $_GET['id']) {
-											questionToUser::showOneQuestion($_GET['id'], true);
-										}
-										else {
-											questionToUser::showOneQuestion($_GET['id'], false);
-										}
-										 ?>
+										<?php questionToAdmin::showOneQuestion($_GET['id']) ?>
 								</div>
 								<div class="col-lg-3"></div>
 								</div><!-- centerl meta -->

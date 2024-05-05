@@ -9,7 +9,7 @@ include('assests/header.php')
 						<div class="forum-warper">
 							<div class="post-filter-sec">
 								<form method="post" class="filter-form">
-									<input type="post" placeholder="Search category">
+									<input type="post" placeholder="Search subcategory">
 									<button><i class="ti-search"></i></button>
 								</form>
 								<div class="purify">
@@ -23,116 +23,51 @@ include('assests/header.php')
 									<a href="#" title="">purify</a>
 								</div>
 							</div>
-							<a class="addnewforum" href="forum-create-topic.php" title=""><i class="fa fa-plus"></i> Add New category</a>
+							<a class="addnewforum" style="" href="create_a_subcategory.php?username=" title=""><i class="fa fa-plus"></i> Create a subcategory!</a>
 						</div>
+						<h3 style="color: black; font-weight: bold;" >Subcategories</h3>
 						<div class="forum-list">
-							<h3 style="color: black; font-weight: bold;" >Categories</h3>
 							<table class="table table-responsive">
 								<thead>
 									<tr>
-										<th scope="col">Categories</th>
 										<th scope="col">subcategories</th>
 										<th scope="col">Questions</th>
+										<th scope="col">Answers</th>
+										<?php
+										if (isset($_GET['adminOrNot']) && $_GET['adminOrNot'] == true) {
+											echo '<th scope="col">Reports</th>';
+										} 
+										?>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<td>
-											<a href="forums-category.html" title="">Mobile App Development</a>
-											<p>list your recommended website and when you start to create your website so please check your laptop window and battery &#58;-&#41;</p>
+										<div class="catName-and-follow-button d-flex m-0 p-0">
+											<a href="subcategory.php?id=" title="">Custom CSS Tweaks</a>
+											<?php
+											if (isset($_GET['adminOrNot']) && $_GET['adminOrNot'] == 1) {
+											echo '<a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">Delete</span></a>';
+										}
+										else {
+											echo '<a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">join</span></a>';
+											echo '<a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">leave</span></a>';
+										} 
+										?>
+										
+										</div>
+										<div class="icon-and-starter d-flex">
+											<i class="fa fa-comments"></i> 
+											<h6 class="m-0 p-0" >Started by: <a href="#" title="">Karly King</a></h6>
+										</div>
 										</td>
-										<td>4</td>
-										<td>5</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Web Development</a>
-											<p>Share your own custom snippets for modifying the winku template beyond it's limits.</p>
-										</td>
-										<td>10</td>
-										<td>3</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Artificial Intelligence</a>
-											<p>Questions regarding pricing and refunds should be posted here.</p>
-										</td>
-										<td>40</td>
-										<td>23</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Data Science</a>
-											<p>Post your SEO optimizations and tips via this thread.</p>
-										</td>
+										<td>7</td>
 										<td>2</td>
-										<td>8</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Machine Learning</a>
-											<p>Having issues with your server and your hosting company won't help you? Post a comment on the forum for help.</p>
-										</td>
-										<td>14</td>
-										<td>60</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Blockchain Technology</a>
-											<p>Winku have a great features and created with the logic for making easy to create social website.</p>
-										</td>
-										<td>15</td>
-										<td>29</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Cloud Computing</a>
-											<p>Useful tips, guides and tricks for beginners.</p>
-										</td>
-										<td>30</td>
-										<td>10</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">DevOps</a>
-											<p>Questions regarding pricing and refunds should be posted here.</p>
-										</td>
-										<td>40</td>
-										<td>23</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Game Development</a>
-											<p>Post your SEO optimizations and tips via this thread.</p>
-										</td>
-										<td>2</td>
-										<td>8</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">UI/UX Design</a>
-											<p>list your recommended website and when you start to create your website so please check your laptop window and battery &#58;-&#41;</p>
-										</td>
-										<td>4</td>
-										<td>5</td>
-									</tr>
-									<tr>
-										<td>
- 
-											<a href="forums-category.html" title="">Information Technology</a>
-											<p>Share your own custom snippets for modifying the winku template beyond it's limits.</p>
-										</td>
-										<td>10</td>
-										<td>3</td>
+										<?php
+										if (isset($_GET['adminOrNot']) && $_GET['adminOrNot'] == 1) {
+											echo '<td>0</td>';
+										} 
+										 ?>
 									</tr>
 								</tbody>
 							</table>
@@ -234,6 +169,6 @@ include('assests/header.php')
 			<a href="#" title="">Sign up</a>
 		</div>
 	</section>
-	<?php
+<?php
 include('assests/footer.php')
-?>	
+?>

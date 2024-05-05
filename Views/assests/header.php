@@ -134,7 +134,7 @@
 							<a href="index.php" title="">Home</a>
 						</li>
 						<li>
-							<a href="forum.php" title="">Categroies</a>
+							<a href="categories.php" title="">Categroies</a>
 						</li>
 						<li>
 							<a href="user-profile.php?=<?php 
