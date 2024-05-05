@@ -224,8 +224,14 @@ class UserMapper implements Mapper{
         }
         return $allPrivileged;
     }
-    public static function retrieveObject($userId){
-        $userArr = self::selectObjectAsArray($userId, 'id');
+    public static function retrieveObject($UniqueIdentifierName, $uniqueIdentifier){
+        $userArr = '';
+        if ($UniqueIdentifierName == 'id') {
+            $userArr = self::selectObjectAsArray($uniqueIdentifier, 'id');
+        }
+        elseif ($UniqueIdentifierName == 'username') {
+            $userArr = self::selectObjectAsArray($uniqueIdentifier, 'username');
+        }
         $user = new User($userArr[0]['fullName'], $userArr[0]['username'], $userArr[0]['gender'], $userArr[0]['email'], $userArr[0]['password']);
         return $user;
     }

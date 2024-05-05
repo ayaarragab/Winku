@@ -1,6 +1,5 @@
 <?php
 require_once "Classification.php";
-require_once '../controllers/dbControllers.php';
 require_once '../Models/Classification.php';
 class Category extends Classification{
 

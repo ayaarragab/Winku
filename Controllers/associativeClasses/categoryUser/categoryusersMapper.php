@@ -1,6 +1,7 @@
 <?php
 require_once '../Controllers/Mapper/mapperHelper.php';
 require_once '../Controllers/Mapper/mapperInterface.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
 require_once '../Controllers/database/dbConnection.php';
 
 class CategoryusersMapper implements Mapper{
@@ -121,5 +122,14 @@ class CategoryusersMapper implements Mapper{
             return 0; // Return 0 if query fails
         }
     }
-    
+    public static function getUserFollowedCategories($userId){
+        $categories = CategoryMapper::selectall();
+        $categoriesArr = array();
+        for ($i=0; $i < count($categories); $i++) { 
+            if (self::isFollowed($userId, $categories[$i]['id'])) {
+                array_push($categoriesArr, $categories[$i]);
+            }
+        }
+        return $categoriesArr;
+    }
 }

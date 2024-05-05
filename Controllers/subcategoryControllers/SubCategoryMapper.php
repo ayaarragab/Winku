@@ -129,7 +129,7 @@ class SubCategoryMapper implements Mapper{
         return false;
     }
 }
-public static function selectall(){
+    public static function selectall(){
     $conn = self::getDbConnection();
     $sqlAtatement = "SELECT * FROM ".self::$tableName;
     $result = $conn->query($sqlAtatement);
@@ -142,5 +142,19 @@ public static function selectall(){
     } else {
         return false;
     }
-}
+    }
+    public static function getSubcategoriesInCategory($categoryId) {
+        $conn = self::getDbConnection();
+        $query = "SELECT * FROM " . self::$tableName . " WHERE categoryId = '$categoryId'";
+        $result = $conn->query($query);
+        if ($result->num_rows > 0) {
+            $subcategories = array();
+            while ($row = $result->fetch_assoc()) {
+                $subcategories[] = $row;
+            }
+            return $subcategories;
+        } else {
+            return false;
+        }
+    }
 }

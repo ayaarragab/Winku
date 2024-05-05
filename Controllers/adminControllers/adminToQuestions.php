@@ -1,6 +1,6 @@
 <?php
 
-require_once '../database/dbConnection.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
 class AdminToQuestions{
 
     protected $conn;

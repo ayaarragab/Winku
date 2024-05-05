@@ -1,26 +1,27 @@
 <?php
 require_once '../Controllers/UserControllers/userMapper.php'; 
-require_once '../Controllers/SubCategoryMapper.php';
-require_once '../Controllers/CategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\subcategoryControllers\SubCategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
 require_once '../Models/Category.php';
 
 class adminToCategory{
 
 
     public function addCategory($Categoryname,$description){
-        if ( $_SESSION || !$_SESSION['username']) {
-            session_start();
-        }
-            $category = new Category($Categoryname, $description);
+        // if ( $_SESSION || !$_SESSION['username']) {
+        //     session_start();
+        // }
+            $category = new Category($Categoryname, 0, 0, 0 ,$description);
             $result = CategoryMapper::add($category);
-            $Category_table = CategoryMapper::selectall();
+        //     $Category_table = CategoryMapper::selectall();
 
-            if ($result) { return $Category_table ;
+        //     if ($result) { 
+        //         return $Category_table ;
               
-            }
-         else {
-                echo "Error adding Category";
-            }
+        //     }
+        //  else {
+        //         echo "Error adding Category";
+        //     }
         }
         
     
@@ -44,5 +45,7 @@ class adminToCategory{
                 echo "Error deleting Category";
             }
         }
-
+    public function discardCategory($username){
+        UserMapper::edit($username, array('suggestedCategory' => 'no categories suggested yet'), 'username');
+    }
     }

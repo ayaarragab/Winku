@@ -162,4 +162,25 @@ public static function selectAllQuestions(){
         return false;
     }
 }
+public static function selectQuestionsBySubcategory($subcategoryId) {
+    $conn = self::getDbConnection();
+    $query = "SELECT * FROM " . self::$tableName . " WHERE subcategoryId = ?";
+    $stmt = $conn->prepare($query);
+    if ($stmt) {
+        $stmt->bind_param('i', $subcategoryId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $questions = array();
+            while ($row = $result->fetch_assoc()) {
+                $questions[] = $row;
+            }
+            return $questions;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
 }

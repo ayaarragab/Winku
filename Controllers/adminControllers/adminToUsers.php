@@ -1,5 +1,5 @@
 <?php
-require_once 'D:\Xampp\htdocs\Winku\Winku\Controllers\database\dbConnection.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
 
 class AdminToUsers{
     protected $conn;
@@ -52,7 +52,7 @@ class AdminToUsers{
 
 <!-- <?php
 
-$admin = new AdminToUsers();
-$admin->getAllUsersNames();
-$admin->deleteUser('ayoyaaa');
+// $admin = new AdminToUsers();
+// $admin->getAllUsersNames();
+// $admin->deleteUser('ayoyaaa');
 ?>  -->

@@ -1,8 +1,8 @@
 <?php
 require_once '../Controllers/UserControllers/userMapper.php'; 
 require_once '../Models/Subcategory.php';
-require_once '../Controllers/SubCategoryMapper.php';
-require_once '../Controllers/CategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\subcategoryControllers\SubCategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
 
 class adminToSubcategory {
 

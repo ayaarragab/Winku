@@ -2,6 +2,7 @@
 session_start();
 require_once 'assests/header.php';
 require_once '../Controllers/questionControllers/questionToUser.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
 ?>		<section>
 			<div class="gap gray-bg">
 				<div class="container-fluid">
@@ -13,16 +14,12 @@ require_once '../Controllers/questionControllers/questionToUser.php';
 										<div class="widget">
 											<h4 class="widget-title">Followed categories</h4>
 											<ul class="naves">
-												<li><a href="forums-category.php">Web Development</a></li>
-												<li><a href="forums-category.php">Mobile App Development</a></li>
-												<li><a href="forums-category.php">Artificial Intelligence</a></li>
-												<li><a href="forums-category.php">Data Science</a></li>
-												<li><a href="forums-category.php">Machine Learning</a></li>
-												<li><a href="forums-category.php">Blockchain Technology</a></li>
-												<li><a href="forums-category.php">Cloud Computing</a></li>
-												<li><a href="forums-category.php">DevOps</a></li>
-												<li><a href="forums-category.php">Game Development</a></li>
-												<li><a href="forums-category.php">UI/UX Design</a></li>												
+												<?php
+												$categories = CategoryusersMapper::getUserFollowedCategories($_SESSION['id']);
+												foreach ($categories as $category) {
+													echo '<li><a href="subcategories.php?subcategoryId=' . $category['id'] . '">' . $category['name'] . '</a></li>';
+												}
+												?>											
 											</ul>
 										</div><!-- Shortcuts -->										
 									</aside>

@@ -3,6 +3,24 @@ require_once '../Controllers/categoryControllers/CategoryMapper.php';
 require_once '../Controllers/subcategoryControllers/SubCategoryMapper.php';
 require_once '../Controllers/questionControllers/questionMapper.php';
 require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/adminControllers/adminPrintFormat.php';
+require_once '../Models/Admin.php';
+if (/* isset($_SESSION['adminId']) */true) { // Assuming this condition is for admin session check
+    // Initialize admin object (replace this with your admin retrieval logic if needed)
+    $admin = new Admin('admin', 'admin', 'admin');
+    
+    if (isset($_GET['function']) && isset($_GET['username']) && isset($_GET['name']) && isset($_GET['description'])) {
+        // Get the value of the 'function' parameter
+        $functionToExecute = $_GET['function'];
+
+        if ($functionToExecute == 'approveCategory') {
+            $admin->AdminToCategory->addCategory($_GET['name'], $_GET['description']);
+			$admin->AdminToCategory->discardCategory($_GET['username']);
+        } elseif ($functionToExecute == 'discardCategory') {
+            $admin->AdminToCategory->discardCategory($_GET['username']);
+        }
+    }
+}
 ?>	
 	
 		<section>
@@ -21,7 +39,7 @@ require_once '../Controllers/UserControllers/userMapper.php';
 												<?php
 													$categories = CategoryMapper::selectall();
 													foreach ($categories as $category) {
-														echo '<li><a href="category_details.php?id="'.$category['id'].'">'.$category['name'].'</a></li>';
+														echo '<li><a href="subcategories.php?adminOrNot=1&categoryId='.intval($category['id']).'">'.$category['name'].'</a></li>';
 													}
 												 ?>
 											</ul>
@@ -82,7 +100,7 @@ require_once '../Controllers/UserControllers/userMapper.php';
 										<div class="widget" style="height:400px;overflow-y:scroll"> <!-- Recommended Categories -->
 											<h4 class="widget-title">Recommended Categories</h4>
 											<ul class="short-profile">
-												<li>
+												<!-- <li>
 													<div class="reco-cat-data-and-icons d-flex justify-content-between">
 														<div class="reco-cat-data">
 															<span>Cyber security</span>
@@ -90,82 +108,12 @@ require_once '../Controllers/UserControllers/userMapper.php';
 															<p>Docker is an important tool in DevOps that every developer should know about!</p>
 														</div>
 														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
 															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
 															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
 														</div>
 													</div>
-												</li>
-												<li>
-													<div class="reco-cat-data-and-icons d-flex justify-content-between">
-														<div class="reco-cat-data">
-															<span>Cyber security</span>
-															<small style="color:#088dcd" >Ayaragab</small>
-															<p>Docker is an important tool in DevOps that every developer should know about!</p>
-														</div>
-														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
-															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
-															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="reco-cat-data-and-icons d-flex justify-content-between">
-														<div class="reco-cat-data">
-															<span>Cyber security</span>
-															<small style="color:#088dcd" >Ayaragab</small>
-															<p>Docker is an important tool in DevOps that every developer should know about!</p>
-														</div>
-														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
-															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
-															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="reco-cat-data-and-icons d-flex justify-content-between">
-														<div class="reco-cat-data">
-															<span>Cyber security</span>
-															<small style="color:#088dcd" >Ayaragab</small>
-															<p>Docker is an important tool in DevOps that every developer should know about!</p>
-														</div>
-														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
-															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
-															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="reco-cat-data-and-icons d-flex justify-content-between">
-														<div class="reco-cat-data">
-															<span>Cyber security</span>
-															<small style="color:#088dcd" >Ayaragab</small>
-															<p>Docker is an important tool in DevOps that every developer should know about!</p>
-														</div>
-														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
-															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
-															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
-														</div>
-													</div>
-												</li>
-												<li>
-													<div class="reco-cat-data-and-icons d-flex justify-content-between">
-														<div class="reco-cat-data">
-															<span>Cyber security</span>
-															<small style="color:#088dcd" >Ayaragab</small>
-															<p>Docker is an important tool in DevOps that every developer should know about!</p>
-														</div>
-														<div class="icons-reco d-flex justify-content-between">
-															<!-- edit it to have exact method name -->
-															<a class=" pe-1 pl-1 pb-1 pt-1 " style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=approve_category&username=<?php # $user['username'] ?>"> Approve <i class="fa-solid fa-check" style="font-size:1.1rem"></i> </a>
-															<a  class=" pe-2 pl-2 pb-1 pt-1" style="height:fit-content; text-align:center" href="approve-or-discard-execute.php?function=discard_category&username=<?php # $user['username'] ?>"> Discard <i class="fa-solid fa-x" style="font-size:1.1rem"></i> </a>
-														</div>
-													</div>
-												</li>
+												</li> -->
+													<?php adminPrintFormat::viewRecommendedCategories() ?>					
 											</ul>
 										</div>
 									</aside>
@@ -176,101 +124,7 @@ require_once '../Controllers/UserControllers/userMapper.php';
 										<h4 class="widget-title">Privileged Users</h4>
 										<div id="searchDir"></div>
 										<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9deaf4f3e9f8efeef2f1f9f8efddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0d0e1d010a1c2f08020e0603410c0002">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107a71637f7e7250777d71797c3e737f7d">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a707b697574785a7d777b737634797577">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd4c6dadbd7f5d2d8d4dcd99bd6dad8">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076d667468696547606a666e6b2964686a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660c071509080426010b070f0a4805090b">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea4afbda1a0ac8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3c3f2c303b2d1e39333f3732703d3133">[email&#160;protected]</a></i>
-												</div>
-											</li>
+											<?php adminPrintFormat::viewAllPrivilegedUsers(); ?>
 										</ul>
 									</div><!-- friends list sidebar -->
 									</aside>
@@ -280,101 +134,7 @@ require_once '../Controllers/UserControllers/userMapper.php';
 									<div class="widget">
 											<h4 class="widget-title">Recently registered users</h4>
 											<ul id="people-list" class="friendz-list">
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">bucky barnes</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9deaf4f3e9f8efeef2f1f9f8efddfaf0fcf4f1b3fef2f0">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="6f0d0e1d010a1c2f08020e0603410c0002">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar3.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">jason borne</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107a71637f7e7250777d71797c3e737f7d">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												<figure>
-													<img src="images/resources/friend-avatar4.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Cameron diaz</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1a707b697574785a7d777b737634797577">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b5dfd4c6dadbd7f5d2d8d4dcd99bd6dad8">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar6.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">andrew</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="076d667468696547606a666e6b2964686a">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar7.jpg" alt="">
-													<span class="status f-off"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">amy watson</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="660c071509080426010b070f0a4805090b">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar5.jpg" alt="">
-													<span class="status f-online"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">daniel warber</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cea4afbda1a0ac8ea9a3afa7a2e0ada1a3">[email&#160;protected]</a></i>
-												</div>
-											</li>
-											<li>
-												
-												<figure>
-													<img src="images/resources/friend-avatar2.jpg" alt="">
-													<span class="status f-away"></span>
-												</figure>
-												<div class="friendz-meta">
-													<a href="time-line.html">Sarah Loren</a>
-													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e3c3f2c303b2d1e39333f3732703d3133">[email&#160;protected]</a></i>
-												</div>
-											</li>
+											<?php adminPrintFormat::viewLastRegisteredUsers(); ?>
 										</ul>
 										</div><!-- who's following --
 									</aside>
