@@ -1,5 +1,5 @@
 <?php
-include('assests/header.php')
+include_once('assests/header.php')
 ?>	
 	<section>
 		<div class="gap gray-bg">

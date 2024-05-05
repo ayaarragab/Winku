@@ -10,7 +10,7 @@ protected $describtion;
 protected $Category_id;
 
 
-public function __construct( $name, $NumberOfQuestions, $numberOfreports, $numOfSubcategories, $describtion) {
+public function __construct($name, $NumberOfQuestions, $numberOfreports, $numOfSubcategories, $describtion) {
   $this->name = $name;
   $this->numberOfQuestions = $NumberOfQuestions;
   $this->numberOfreports = $numberOfreports;

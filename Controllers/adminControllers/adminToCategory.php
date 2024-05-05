@@ -7,32 +7,24 @@ require_once '../Models/Category.php';
 class adminToCategory{
 
 
-    public function addCategory($category){
+    public function addCategory($Categoryname,$description){
         if ( $_SESSION || !$_SESSION['username']) {
             session_start();
         }
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $name = $_POST['category_name'];
-            $describtion = $_POST['category_description'];  // Get data
-                
+            $category = new Category($Categoryname, $description);
             $result = CategoryMapper::add($category);
-            $resultt = CategoryMapper::selectSpecificAttr( $name,'name', 'name');
+            $Category_table = CategoryMapper::selectall();
 
-            if ($result) {
-
-                echo "Category added successfully";
-                foreach ( $resultt as $name){
-                    
-                    echo $resultt ;
+            if ($result) { return $Category_table ;
               
-            }} else {
+            }
+         else {
                 echo "Error adding Category";
             }
         }
-
-    }
+        
     
-    public function deleteCategory($categoryId){
+    public function deleteCategory($categoryname){
             // delete sub first
             /*
          $subcategories = SubCategoryMapper::selectObjectAsArray($categoryId, 'Category_id');
@@ -44,7 +36,7 @@ class adminToCategory{
             }*/
             
             // delete category
-            $result = CategoryMapper::delete($categoryId, 'id');
+            $result = CategoryMapper::delete($categoryname, 'name');
         
             if ($result) {
                 echo "Category deleted successfully";

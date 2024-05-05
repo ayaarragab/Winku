@@ -5,6 +5,9 @@ if (!isset($_SESSION['username'])) {
 	return header('Location: landing.php');
 }
 include_once('assests/header.php');
+require_once '../Controllers/UserControllers/UserToSubcategory.php';
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Models/User.php';
 ?>					
 	<section>
 			<div class="gap gray-bg">
@@ -36,11 +39,19 @@ include_once('assests/header.php');
 									<div class="central-meta">
 										<div class="new-postbox">
 											<div class="newpst-input">
+												<?php
+												if (isset($_SESSION['id'])) {
+													if (isset($_POST['subcategoryName']) && isset($_POST['categoryName'])) {
+														$user = UserMapper::retrieveObject($_SESSION['id']);
+														$user->userToSubcategory->createSubcategory($_POST['subcategoryName'], $_POST['categoryName'], $_SESSION['username']);
+													}
+												}
+												?>
 												<form action="" method="POST">
                                                     <h5 style="color: black; font-weight: bold;" >Please enter subcategory name</h5>
-													<textarea name="title" rows="1" style="font-size: large;" placeholder="e.g. Laravel"></textarea>
+													<textarea name="subcategoryName" rows="1" style="font-size: large;" placeholder="e.g. Laravel"></textarea>
                                                     <h5 style="color: black; font-weight: bold;" >Please enter category name</h5>
-													<textarea name="title" rows="1" style="font-size: large;" placeholder="e.g. web development"></textarea>
+													<textarea name="categoryName" rows="1" style="font-size: large;" placeholder="e.g. web development"></textarea>
                                                     <button style="border-radius: 10px;width:fit-content" name="submit" class="mt-4" type="submit">Create subcategory</button>
 												</form>
 											</div>
@@ -57,5 +68,5 @@ include_once('assests/header.php');
 	</section>
 
 <?php
-include('assests/footer.php')
+include_once('assests/footer.php')
 ?>

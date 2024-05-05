@@ -1,38 +1,34 @@
 <?php
 require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\categoryUser\categoryusersMapper.php';
-require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categorycontrollers\CategoryMapper.php';
 require_once 'userMapper.php';
-$_SESSION['userId'] = '5';
-$_SESSION['privelornot'] = TRUE;
 class UserToCategory{
-    public function followCategory($categoryId)
+    public function followCategory($categoryId, $userId)
     {
-       if ( !$_SESSION || !$_SESSION['userId']) {
-            session_start();
-        }
-
-        $cateroryuser = new Category_Users($categoryId , $_SESSION['userId']);
-         $result = CategoryusersMapper::add($cateroryuser);
+    //    if ( !$_SESSION || !$_SESSION['userId']) {
+    //         session_start();
+    //     }
+        $cateroryuser = new Category_Users($categoryId , $userId);
+        $result = CategoryusersMapper::add($cateroryuser);
         
-            if ($result) {
-                echo "category followed successfully";
-            } else {
-                echo "Error follwing Category";
-            }
+            // if ($result) {
+            //     echo "category followed successfully";
+            // } else {
+            //     echo "Error follwing Category";
+            // }
         }
     
-    public function unfollowCategory($categoryId)
+    public function unfollowCategory($userId, $categoryId)
     {
-        if ( !$_SESSION || !$_SESSION['userId']) {
-            session_start();
-        } 
-        $result = CategoryusersMapper::delete($_SESSION['userId'] ,$categoryId);
-        if ($result) {
-            echo "category unfollowed successfully";
-        } else {
-            echo "Error unfollwing Category";
-        }
-
+        // if ( !$_SESSION || !$_SESSION['userId']) {
+        //     session_start();
+        // } 
+        $result = CategoryusersMapper::delete($categoryId, $userId);
+        // if ($result) {
+        //     echo "category unfollowed successfully";
+        // } else {
+        //     echo "Error unfollwing Category";
+        // }
     }
     public function reportCategory($categoryId)
     {
@@ -48,24 +44,15 @@ class UserToCategory{
         }
         
     }
-    public function recommendCategory($name, $description)
+    public function recommendCategory($name, $description, $userId)
     {
-        if ( !$_SESSION || !$_SESSION['privelornot']) {
-            session_start();
-        }
-
-        if(!$_SESSION['privelornot']){
-            echo "sorry you havenot the permissions to recommend";
-        }else{
-            $totalrecommendation = $name.": ".$description;
-            $arrOfKeyValue = array("suggestedCategory" =>$totalrecommendation);
-           $edit =UserMapper::edit($_SESSION['userId'], $arrOfKeyValue, "id");
-           if ($edit) {
-            echo "successfull recommendation";
-        } else {
-            echo "Error in recommendation";
-        }
-        }
-
+        // if (!isset($_SESSION)) {
+        //     session_start();
+        // }
+        $totalrecommendation = $name.": ".$description;
+        $arrOfKeyValue = array("suggestedCategory" =>$totalrecommendation);
+        $edit =UserMapper::edit($userId, $arrOfKeyValue, "id");
+        // if ($edit)
+        //     echo "successfull recommendation";
     }
 }

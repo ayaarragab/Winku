@@ -21,20 +21,53 @@ class QuestionMapper implements Mapper{
         }
         return self::$connection;
     }
+    // public static function add($object){ # When you add a user add its builder
+    //     $conn = QuestionMapper::getDBConnection();
+    //     $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object->builder);
+    //     $columns='';
+    //     $values='';
+    //     foreach ($arrayOfAttributes as $key => $value) {
+    //         $columns .= "$key, ";
+    //         $value = 
+    //         $values .= "'$value', ";        
+    //     }
+    //     $columns = rtrim($columns, ', ');
+    //     $values = rtrim($values, ', ');
+    //     $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
+    //     echo '<br>'.$query.'<br>';
+    //     return $conn->query($query);
+    // }
     public static function add($object){ # When you add a user add its builder
         $conn = QuestionMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object->builder);
         $columns='';
         $values='';
+        $params = []; // Array to hold parameter values
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
-            $values .= "'$value', ";        
+            $values .= "?, ";
+            $params[] = $value; // Add value to the parameters array
         }
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        return $conn->query($query);
+        // Prepare the statement
+        $stmt = $conn->prepare($query);
+        if ($stmt) {
+            // Bind parameters
+            $types = str_repeat('s', count($params)); // Assuming all values are strings
+            $stmt->bind_param($types, ...$params);
+            // Execute the statement
+            $result = $stmt->execute();
+            // Close the statement
+            $stmt->close();
+            return $result;
+        } else {
+            // Handle error if prepare fails
+            return false;
+        }
     }
+    
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
         $conn = self::getDbConnection();
         $set = "";

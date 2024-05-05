@@ -1,6 +1,11 @@
 <?php
 session_start();
 include_once('assests/header.php');
+require_once '../Controllers/UserControllers/userMapper.php';
+require_once '../Controllers/categoryControllers/CategoryMapper.php';
+require_once '../Models/User.php';
+require_once '../Controllers/associativeClasses/categoryUser/Category_Users.php';
+require_once '../Controllers/associativeClasses/categoryUser/categoryusersMapper.php';
 ?>	
 	<section>
 		<div class="gap100">
@@ -25,9 +30,13 @@ include_once('assests/header.php');
 								</div>
 							</div>
 							<?php if (isset($_SESSION['id'])) {
-								echo '<a class="addnewforum" style="" href="be_a_privileged_user.php" title=""><i class="fa fa-plus"></i> Be a priviliged user</a>';
-								// show this if privileged
-								// <a class="addnewforum" style="display:none" href="forum-create-topic.php" title=""><i class="fa fa-plus"></i> Add a new category</a>
+								$user = UserMapper::selectObjectAsArray($_SESSION['id'], 'id');
+								if ($user[0]['privilgedOrNot'] == 1) {
+									echo '<a class="addnewforum" style="" href="recommend_category.php?id="'.$user[0]['id'].'" title=""><i class="fa fa-plus"></i> Recommend a new category</a>';
+								}
+								else {
+									echo '<a class="addnewforum" style="" href="be_a_privileged_user.php?id="'.$user[0]['id'].'"title=""><i class="fa fa-plus"></i> Be a priviliged user</a>';
+								}
 							}?>
 							
 						</div>
@@ -39,22 +48,52 @@ include_once('assests/header.php');
                 <th scope="col">Categories</th>
                 <th scope="col">Subcategories</th>
                 <th scope="col">Questions</th>
+				<th scope="col">Followers</th>
             </tr>
         </thead>
         <tbody>
             <!-- Repeat this block for each category -->
-            <tr>
-                <td>
-					<div class="catName-and-follow-button d-flex m-0 p-0">
-						<a href="subcategories.php?categoryId=<?php #$category['id'] ?>" title="">Mobile App Development</a>
-						<a class="addnewforum p-1 follow-cat"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">Follow</span></a>
-						<a class="addnewforum p-1 follow-cat d-none"  href="execute.php?function=&categoryId=&categoryName=" title=""><span style="color:white">Unfollow</span></a>
-					</div>
-                    <p class="p-0 m-0" >list your recommended website and when you start to create your website so please check your laptop window and battery &#58;-&#41;</p>
-                </td>
-                <td>4</td>
-                <td>5</td>
-            </tr>
+            
+					<?php
+					if (isset($_SESSION['id'])) {
+						$user = UserMapper::retrieveObject($_SESSION['id']);
+						if(isset($_GET['function']) && isset($_GET['categoryId'])) {
+							// Get the value of the 'function' parameter
+							$functionToExecute = $_GET['function'];
+						
+							if ($functionToExecute == 'followCategory') {
+							   $user->userToCategory->followCategory($_GET['categoryId'], $_SESSION['id']);
+							}
+							elseif ($functionToExecute == 'unfollowCategory') {
+								$user->userToCategory->unfollowCategory($_GET['categoryId'], $_SESSION['id']);
+							}
+						}
+					}
+						$categories = CategoryMapper::selectall();
+						for ($i=0; $i < count($categories); $i++) { 
+								echo '<tr>';
+								echo '<td>';
+								echo '<div class="catName-and-follow-button d-flex m-0 p-0">';
+								echo '<a href="subcategories.php?categoryId="'.$categories[$i]['id'].'">'.$categories[$i]['name'].'</a>';
+
+								if (CategoryusersMapper::isFollowed($_SESSION['id'], $categories[$i]['id'])) {
+									echo '<a class="addnewforum me-2  p-1 unfollow-cat" style="margin-right:20px" href="categories.php?categoryId=';
+									echo $categories[$i]['id'].'&function=unfollowCategory">';
+									echo '<span style="color:white">unfollow</span></a></div>';
+								}
+								else {
+									echo '<a class="addnewforum d-block p-1 follow-cat" style="margin-right:10px" href="categories.php?categoryId=';
+									echo $categories[$i]['id'].'&function=followCategory">';
+									echo '<span style="color:white">Follow</span></a></div>';								
+							}
+								echo '<p class="p-0 m-0" >'.$categories[$i]['description'].'</p>';
+								echo '</td>';
+								echo '<td>'.$categories[$i]['numOfSubcategories'].'</td>';
+								echo '<td>'.$categories[$i]['numberOfQuestions'].'</td>';
+								echo '<td>'.CategoryusersMapper::getNumFollowersPerCategory($categories[$i]['id']).'</td>';
+								echo '</tr>';
+						}
+					 ?>
             <!-- End of category block -->
             <!-- Repeat similar blocks for other categories -->
         </tbody>

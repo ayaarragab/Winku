@@ -1,5 +1,12 @@
 <?php
-include('assests/header.php')
+session_start();
+include_once('assests/header.php');
+require_once '../Controllers/UserControllers/UserToCategory.php';
+require_once '../Models/User.php';
+if (isset($_SESSION) && isset($_POST['category_name']) && isset($_POST['category_description'])) {
+	$user = UserMapper::retrieveObject($_SESSION['id']);
+	$user->userToCategory->recommendCategory($_POST['category_name'], $_POST['category_description'], $_SESSION['id']);
+}
 ?>	
 	<section>
 		<div class="ext-gap bluesh high-opacity">
@@ -44,7 +51,7 @@ include('assests/header.php')
 						</div>
 						<div class="forum-form">
 							<h5 class="f-title"><i class="ti-info-alt"></i>Recommend a category</h5>
-							<form method="post" action="add_category.php">
+							<form method="post" action="">
 								<div class="form-group">	
 								  <input type="text" name="category_name" id="input" required="required"/>
 								  <label class="control-label" for="input">Category name</label><i class="mtrl-select"></i>
@@ -54,8 +61,7 @@ include('assests/header.php')
 								  <label class="control-label" for="textarea">Description</label><i class="mtrl-select"></i>
 								</div>
 								<div class="submit-btns">
-									<button type="button" class="mtr-btn"><span>Cancel</span></button>
-									<button type="submit" class="mtr-btn"><span>Post Topic</span></button>
+									<button type="submit" class="mtr-btn"><span>Recommend</span></button>
 								</div>
 							</form>
 						</div>

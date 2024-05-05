@@ -6,10 +6,9 @@ require_once '../Controllers/database/dbConnection.php';
 class SubCategoryUsersMapper implements Mapper{
     public static $tableName = 'Subcategoryusers';
     public static $connection;
-    public static $columns = ['numberOfQuestions',
-                              'numberOfAnswers',
-                              'ownerUsername',
-                              'Category_id'];
+    public static $columns = ['userId',
+                              'subcategoryId'];
+
     public static function getDbConnection() {
         if (!isset(self::$connection)) {
             self::$connection = DBConnection::getConnection();
@@ -17,17 +16,18 @@ class SubCategoryUsersMapper implements Mapper{
         return self::$connection;
     }
     public static function add($object){
+        $columns = "";
+        $values = "";
         $conn = SubCategoryUsersMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
         print_r($arrayOfAttributes);
         foreach ($arrayOfAttributes as $key => $value) {
-            $columns /*.*/= "$key, ";
-            $values /*.*/= "'$value', ";        
+            $columns .= "$key, ";
+            $values .= "'$value', ";        
         }
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        echo '<br>'.$query.'<br>';
         return $conn->query($query);
     }
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
@@ -45,10 +45,10 @@ class SubCategoryUsersMapper implements Mapper{
         }
         return $conn->query($query);
     }
-    public static function delete($userid, $categoryid){
+    public static function delete($userid, $subcategoryId){
         $connection = self::getDbConnection();
 
-        $sql = "DELETE FROM ".self::$tableName." WHERE categoryid = ".$categoryid." AND userid = ".$userid;
+        $sql = "DELETE FROM ".self::$tableName." WHERE subcategoryid = ".$subcategoryId." AND userid = ".$userid;
 
         if ($connection->query($sql) === TRUE) {
             return true;
@@ -57,10 +57,38 @@ class SubCategoryUsersMapper implements Mapper{
             return false;
         }
     }
-    public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
+
+    public static function searchAttributeWithOther($attributeValue,$attributeName,$uniqueIdentifier, $UniqueIdentifierName) {
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifierName;
+        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$attributeName." = '".$attributeValue."' AND".$UniqueIdentifierName." = '".$uniqueIdentifier."'";
         $result = $conn->query($sqlAtatement);
+        if ($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
+        // $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
+        // if ($objectArr !== false) {
+        //     return $objectArr[$attrname];
+        // }
+        // else {
+        //     echo "couldn't find the data";
+        // }
+    }
+    public static function isJoined($userId, $subcategoryId){
+        if (self::selectObjectAsArray($userId, $subcategoryId)) {
+         return true;
+        }
+        else{
+         return false;
+        }
+    }
+    public static function selectObjectAsArray($userId, $subcategoryId){
+        $conn = self::getDbConnection();
+        $sql = "SELECT * FROM " . self::$tableName . " WHERE " . 'userId' . " = " . $userId .' AND '.'subcategoryId = '.$subcategoryId;
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $data = array();
             while ($row = $result->fetch_assoc()) {
@@ -71,35 +99,18 @@ class SubCategoryUsersMapper implements Mapper{
             return false;
         }
     }
-    public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
-        $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
-        if ($objectArr !== false) {
-            return $objectArr[$attrname];
-        }
-        else {
-            echo "couldn't find the data";
-        }
-    }
-    public static function searchAttribute($attributeValue) {
+    public static function getNumMembersPerSubcategory($subcategoryId){
         $conn = self::getDbConnection();
-        $query = "SELECT * FROM " . self::$tableName;
+        $query = 'SELECT COUNT(*) AS num_rows
+        FROM categoryusers
+        WHERE categoryId = '.intval($subcategoryId);
+        
         $result = $conn->query($query);
-        if ($result->num_rows > 0) {
-            $users = array();
-            while ($row = $result->fetch_assoc()) {
-                $users[] = $row;
-            }
-            foreach ($users as $user) {
-                foreach ($user as $key => $value) {
-                    if ($value == $attributeValue) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+        if ($result) {
+            $row = $result->fetch_assoc(); // Fetch the row
+            return $row['num_rows']; // Return the count value
+        } else {
+            return 0; // Return 0 if query fails
         }
-    else{
-        return false;
     }
-}
 }

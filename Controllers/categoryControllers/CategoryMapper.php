@@ -6,13 +6,13 @@ require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Cont
 
 
 class CategoryMapper implements Mapper{
-    public static $tableName = 'Category';
+    public static $tableName = 'category';
     public static $connection;
     public static $columns = ['name',
                               'numberOfQuestions',
                               'numberOfreports',
                               'numOfSubcategories', 
-                              'describtion'];
+                              'description'];
     public static function getDbConnection() {
         if (!isset(self::$connection)) {
             self::$connection = DBConnection::getConnection();
@@ -20,12 +20,14 @@ class CategoryMapper implements Mapper{
         return self::$connection;
     }
     public static function add($object){
+        $columns = "";
+        $values ="";
         $conn = CategoryMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
         print_r($arrayOfAttributes);
         foreach ($arrayOfAttributes as $key => $value) {
-            $columns /*.*/= "$key, ";
-            $values /*.*/= "'$value', ";        
+            $columns .= "$key, ";
+            $values .= "'$value', ";        
         }
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
@@ -72,7 +74,38 @@ class CategoryMapper implements Mapper{
     
     public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifierName;
+        // Properly escape the values and remove the extra space in the WHERE clause
+        $sqlStatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = '".$conn->real_escape_string($UniqueIdentifier)."'";
+        $result = $conn->query($sqlStatement);
+        if ($result) {
+            if ($result->num_rows > 0) {
+                $data = array();
+                while ($row = $result->fetch_assoc()) {
+                    $data[] = $row;
+                }
+                return $data;
+            } else {
+                return false;
+            }
+        } else {
+            // Handle query error
+            echo "Error: " . $conn->error;
+            return false;
+        }
+    }
+    
+    public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
+        $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
+        if ($objectArr !== false) {
+            return $objectArr[0][$attrname];
+        }
+        else {
+            echo "couldn't find the data";
+        }
+    }
+    public static function selectall(){
+        $conn = self::getDbConnection();
+        $sqlAtatement = "SELECT * FROM ".self::$tableName;
         $result = $conn->query($sqlAtatement);
         if ($result->num_rows > 0) {
             $data = array();
@@ -82,15 +115,6 @@ class CategoryMapper implements Mapper{
             return $data;
         } else {
             return false;
-        }
-    }
-    public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
-        $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
-        if ($objectArr !== false) {
-            return $objectArr[$attrname];
-        }
-        else {
-            echo "couldn't find the data";
         }
     }
     public static function searchAttribute($attributeValue) {

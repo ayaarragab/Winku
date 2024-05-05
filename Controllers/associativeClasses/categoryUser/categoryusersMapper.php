@@ -1,11 +1,7 @@
 <?php
-require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperHelper.php';
-require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperInterface.php';
-require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
-require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\categoryUser\Category_Users.php';
-
-
-
+require_once '../Controllers/Mapper/mapperHelper.php';
+require_once '../Controllers/Mapper/mapperInterface.php';
+require_once '../Controllers/database/dbConnection.php';
 
 class CategoryusersMapper implements Mapper{
     public static $tableName = 'categoryusers';
@@ -20,18 +16,16 @@ class CategoryusersMapper implements Mapper{
     }
     public static function add($object){
         $columns = "";
-        $values= "";
+        $values ="";
         $conn = CategoryusersMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
-        //print_r($arrayOfAttributes);
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
-            $values .= "'$value', ";        
+            $values  .= "'$value', ";        
         }
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        //echo '<br>'.$query.'<br>';
         return $conn->query($query);
     }
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
@@ -49,11 +43,10 @@ class CategoryusersMapper implements Mapper{
         }
         return $conn->query($query);
     }
-    public static function delete($userid, $categoryid){
+    public static function delete($userId, $categoryId){
         $connection = self::getDbConnection();
-
-        $sql = "DELETE FROM ".self::$tableName." WHERE categoryid = ".$categoryid." AND userid = ".$userid;
-
+    
+        $sql = "DELETE FROM " . self::$tableName . " WHERE " . 'userId' . " = " . $userId .' AND '.'categoryId = '.$categoryId;
         if ($connection->query($sql) === TRUE) {
             return true;
         } else {
@@ -61,10 +54,10 @@ class CategoryusersMapper implements Mapper{
             return false;
         }
     }
-    public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
+    public static function selectObjectAsArray($userId, $categoryId){
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifierName;
-        $result = $conn->query($sqlAtatement);
+        $sql = "SELECT * FROM " . self::$tableName . " WHERE " . 'userId' . " = " . $userId .' AND '.'categoryId = '.$categoryId;
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             $data = array();
             while ($row = $result->fetch_assoc()) {
@@ -78,13 +71,13 @@ class CategoryusersMapper implements Mapper{
     public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
         $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
         if ($objectArr !== false) {
-            return $objectArr[0][$attrname];
+            return $objectArr[$attrname];
         }
         else {
             echo "couldn't find the data";
         }
     }
-    public static function searchAttribute($attributeName, $attributeValue) {
+    public static function searchAttribute($attributeValue) {
         $conn = self::getDbConnection();
         $query = "SELECT * FROM " . self::$tableName;
         $result = $conn->query($query);
@@ -95,7 +88,7 @@ class CategoryusersMapper implements Mapper{
             }
             foreach ($users as $user) {
                 foreach ($user as $key => $value) {
-                    if ($value == $attributeValue && $key == $attributeName) {
+                    if ($value == $attributeValue) {
                         return true;
                     }
                 }
@@ -106,4 +99,27 @@ class CategoryusersMapper implements Mapper{
         return false;
     }
 }
+    public static function isFollowed($userId, $categoryId){
+           if (self::selectObjectAsArray($userId, $categoryId)) {
+            return true;
+           }
+           else{
+            return false;
+           }
+    }
+    public static function getNumFollowersPerCategory($categoryId){
+        $conn = self::getDbConnection();
+        $query = 'SELECT COUNT(*) AS num_rows
+        FROM categoryusers
+        WHERE categoryId = '.intval($categoryId);
+        
+        $result = $conn->query($query);
+        if ($result) {
+            $row = $result->fetch_assoc(); // Fetch the row
+            return $row['num_rows']; // Return the count value
+        } else {
+            return 0; // Return 0 if query fails
+        }
+    }
+    
 }

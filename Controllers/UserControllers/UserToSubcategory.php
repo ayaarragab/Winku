@@ -1,4 +1,8 @@
 <?php
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\subcategoryUser\SubCategory_Users.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\associativeClasses\subcategoryUser\SubCategoryUsersMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Models\Subcategory.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\subcategoryControllers\SubCategoryMapper.php';
 class UserToSubcategory{
     public function addQuestionToSubcategory($content, $categoryId, $subcategoryId)
     {
@@ -9,81 +13,59 @@ class UserToSubcategory{
     {
         // Add logic to delete the question from the specified subcategory
     }
-    public function joinSubcategory($subcategoryId)
+    public function joinSubcategory($subcategoryId, $userId)
     {
-         if ( $_SESSION || !$_SESSION['username']) {
-            session_start();
-          }
+        //  if ( $_SESSION || !$_SESSION['username']) {
+        //     session_start();
+        //   } 
+                // $SubCategory_id = SubCategoryMapper::selectSpecificAttr($subcategoryname, 'name', 'id');
 
-                // Check if the user is already a member of the subcategory
-                $isMember = SubCategoryUsersMapper::searchAttribute( $_SESSION['id'],'id','ownerUsername');
-        
-                if ($isMember) {
-                    echo "User is already a member of the subcategory.";
-                    return;
-                }
-        
                 // Create a new subcategory membership for the user
-                $subCategoryMembership = new stdClass(); /* stdClass is a built-in PHP class that serves as a generic container for holding data. 
-                                                            It is a simple way to create an object without explicitly defining a class structure.
-                                                            The stdClass objects can be used to store and manipulate data in a structured manner.*/
-                $subCategoryMembership->numberOfQuestions = 0;
-                $subCategoryMembership->numberOfAnswers = 0;
-                $subCategoryMembership->ownerUsername = UserMapper::selectSpecificAttr($_SESSION['id'],'id','ownerUsername');
-                $subCategoryMembership->Category_id = $subcategoryId;
-        
+                $subCategoryMembership = new SubCategory_Users($subcategoryId, $userId);
+
                 // Store the subcategory membership in the Subcategoryusers table
                 SubCategoryUsersMapper::add($subCategoryMembership); // $subCategoryMembership is an object
         
-                echo "User joined the subcategory successfully.";
-            }
+                // echo "User joined the subcategory successfully."; //display subcategory page
+    }
+        
     
-    public function createSubcategory($categoryId){
-        if ( $_SESSION || !$_SESSION['username']) {
-            session_start();
-        }
-            // Create a new subcategory for the user
-            $subCategory = new stdClass();
-            $subCategory->numberOfQuestions = 0;
-            $subCategory->numberOfAnswers = 0;
-            $subCategory->ownerUsername = UserMapper::selectSpecificAttr($_SESSION['id'],'id', 'username');
-            $subCategory->Category_id = $categoryId;
-    
+
+    public function createSubcategory($subname, $categoryname, $username){
+        // if ( $_SESSION || !$_SESSION['username']) {
+        //     session_start();
+        // }
+
+            $Category_id = CategoryMapper::selectSpecificAttr($categoryname, 'name', 'id');
+             // Create a new subcategory for the user
+            $subCategory = new Subcategory($subname, $username, intval($Category_id));
             // Store the subcategory in the Subcategoryusers table
-            SubCategoryUsersMapper::add($subCategory);
+            SubCategoryMapper::add($subCategory);
         }
     
-    public function leaveSubcategory($subcategoryId)
+
+
+    public function leaveSubcategory($subcategoryId, $userId)
     {
-       
-        if ( $_SESSION || !$_SESSION['username']) {
-            session_start();
-          }
-                // Check if the user is a member of the subcategory
-                $isMember = SubCategoryUsersMapper::searchAttribute($_SESSION['id'], 'ownerUsername');
-        
-                if (!$isMember) {
-                    echo "User is not a member of the subcategory.";
-                    return;
-                }
-        
+        // if ( $_SESSION || !$_SESSION['username']) {
+        //     session_start();
+        //   }                
                 // Remove the user from the subcategory
-                SubCategoryUsersMapper::delete($_SESSION['id'], 'ownerUsername');
+         SubCategoryUsersMapper::delete($userId, $subcategoryId);
+    }
+            
         
-                echo "User left the subcategory successfully.";
-            }
-        
-    public function reportSubcategory($subcategoryId)
+    public function reportSubcategory($subcategoryname)
     {
-            $rep =SubCategoryMapper::selectSpecificAttr($subcategoryId, 'id', 'numberOfreports');
+            $rep =SubCategoryMapper::selectSpecificAttr($subcategoryname, 'name', 'numberOfreports');
             $newrep = $rep + 1;
             $arr = array("numberOfreports" => $newrep);
-            $result = SubCategoryMapper::edit($subcategoryId, $arr, "id");
-            if ($result) {
-                echo "subcategory reported successfully";
-            } else {
-                echo "Error reporting subCategory";
-            }
+            $result = SubCategoryMapper::edit($subcategoryname, $arr, 'name');
+            // if ($result) {
+            //     echo "subcategory reported successfully";
+            // } else {
+            //     echo "Error reporting subCategory";
+            // }
             
         }
     }

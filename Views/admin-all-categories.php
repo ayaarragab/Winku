@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('assests/header.php');
+require_once 'assests/admin-header-few-differences.php';
 ?>	
 	<section>
 		<div class="gap100">

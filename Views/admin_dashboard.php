@@ -1,4 +1,9 @@
-<?php require_once 'assests/admin-header-few-differences.php'; ?>	
+<?php require_once 'assests/admin-header-few-differences.php';
+require_once '../Controllers/categoryControllers/CategoryMapper.php';
+require_once '../Controllers/subcategoryControllers/SubCategoryMapper.php';
+require_once '../Controllers/questionControllers/questionMapper.php';
+require_once '../Controllers/UserControllers/userMapper.php';
+?>	
 	
 		<section>
 
@@ -13,17 +18,12 @@
 										<div class="widget"> <!-- Done (categories) -->
 											<h4 class="widget-title">Categories</h4>
 											<ul class="naves">
-												<!-- <li><a href="category_details.php?id=(put the category id here)"> -->
-												<li><a href="category_details.php?id=">Web Development</a></li>
-												<li><a href="forums-category.php">Mobile App Development</a></li>
-												<li><a href="category_details.php?id=">Artificial Intelligence</a></li>
-												<li><a href="category_details.php?id=">Data Science</a></li>
-												<li><a href="forums-category.php">Machine Learning</a></li>
-												<li><a href="category_details.php?id=">Blockchain Technology</a></li>
-												<li><a href="forums-category.php">Cloud Computing</a></li>
-												<li><a href="category_details.php?id=">DevOps</a></li>
-												<li><a href="forums-category.php">Game Development</a></li>
-												<li><a href="category_details.php?id=">UI/UX Design</a></li>												
+												<?php
+													$categories = CategoryMapper::selectall();
+													foreach ($categories as $category) {
+														echo '<li><a href="category_details.php?id="'.$category['id'].'">'.$category['name'].'</a></li>';
+													}
+												 ?>
 											</ul>
 										</div>
 									</aside>
@@ -33,41 +33,48 @@
 										
 										<div class="widget"> <!--Done (statitics) -->
 											<h4 class="widget-title">Statistics</h4>
+											<?php $numQuestions = count(QuestionMapper::selectAllQuestions());
+												  $numCategories = count(CategoryMapper::selectall());
+												  $numUsers = count(UserMapper::selectAllUsers());
+												  $numAnswers = 10; # will be replaced by sara function
+												  $numPrivilegedUsers = count(UserMapper::selectPrivilegedUsers()); # function
+												  $numSubcategories = count(SubCategoryMapper::selectall());
+											 ?>
 											<ul class="recent-photos">
 												<li>
 													<div class="numThing border-bottom m-2">
 														<h6 style="font-weight:bold; text-align:center">Questions</h6>
-														<h6 style="font-weight:bold; text-align:center; color:#088dcd">150</h6>
+														<h6 style="font-weight:bold; text-align:center; color:#088dcd"><?php echo $numQuestions ?></h6>
 													</div>
 												</li>
 												<li>
 													<div class="numThing border-bottom m-2">
 														<h6 style="font-weight:bold; text-align:center">Answers</h6>
-														<h6 style="font-weight:bold; text-align:center;color:#088dcd">500</h6>
+														<h6 style="font-weight:bold; text-align:center;color:#088dcd"><?php echo $numAnswers ?></h6>
 													</div>
 												</li>
 												<li>
 													<div class="numThing border-bottom">
 														<h6 style="font-weight:bold; text-align:center">Categories</h6>
-														<h6 style="font-weight:bold; text-align:center;color:#088dcd">50</h6>
+														<h6 style="font-weight:bold; text-align:center;color:#088dcd"><?php echo $numCategories ?></h6>
 													</div>
 												</li>
 												<li class="">
 													<div class="numThing border-bottom">
 														<h6 style="font-weight:bold; text-align:center">Users</h6>
-														<h6 style="font-weight:bold; text-align:center;color:#088dcd">50</h6>
+														<h6 style="font-weight:bold; text-align:center;color:#088dcd"><?php echo $numUsers ?></h6>
 													</div>
 												</li>
 												<li>
 													<div class="numThing border-bottom">
 														<h6 style="font-weight:bold; text-align:center">Priviliged Users</h6>
-														<h6 style="font-weight:bold; text-align:center;color:#088dcd">1000</h6>
+														<h6 style="font-weight:bold; text-align:center;color:#088dcd"><?php echo $numPrivilegedUsers ?></h6>
 													</div>
 												</li>
 												<li>
 												<div class="numThing border-bottom">
 														<h6 style="font-weight:bold; text-align:center">Subcategories</h6>
-														<h6 style="font-weight:bold; text-align:center;color:#088dcd">1000</h6>
+														<h6 style="font-weight:bold; text-align:center;color:#088dcd"><?php echo $numSubcategories ?></h6>
 													</div>
 												</li>
 											</ul>

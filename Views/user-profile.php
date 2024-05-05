@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['username'])) {
+	// Redirect user to landing page if not logged in
+	return header('Location: landing.php');
+}
 include_once('assests/header.php');
 require_once '../Controllers/UserControllers/userMapper.php';
 require_once '../Controllers/questionControllers/questionToUser.php';

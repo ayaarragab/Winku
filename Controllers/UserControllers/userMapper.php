@@ -37,23 +37,71 @@ class UserMapper implements Mapper{
         }
         return self::$connection;
     }
+    // public static function add($object){ # When you add a user add its builder
+    //     $columns="";
+    //     $values ="";
+    //     $conn = UserMapper::getDBConnection();
+    //     $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
+    //     print_r($arrayOfAttributes);
+        
+    //     foreach ($arrayOfAttributes as $key => $value) {
+    //         $columns .= "$key, ";
+    //         $values .= "'$value', ";        
+    //     }
+    //     $columns = rtrim($columns, ', ');
+    //     $values = rtrim($values, ', ');
+    //     $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
+    //     echo '<br>'.$query.'<br>';
+    //     return $conn->query($query);
+    // }
     public static function add($object){ # When you add a user add its builder
-        $columns="";
-        $values ="";
         $conn = UserMapper::getDBConnection();
         $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
-        print_r($arrayOfAttributes);
+        
+        $columns = "";
+        $values = "";
+        $params = []; // Array to hold parameter values
         
         foreach ($arrayOfAttributes as $key => $value) {
             $columns .= "$key, ";
-            $values .= "'$value', ";        
+            $values .= "?, ";
+            $params[] = $value; // Add value to the parameters array
         }
+        
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
+        
         $query = "INSERT INTO ".self::$tableName." ($columns) VALUES ($values)";
-        echo '<br>'.$query.'<br>';
-        return $conn->query($query);
+        
+        // Prepare the statement
+        $stmt = $conn->prepare($query);
+        if ($stmt) {
+            // Bind parameters
+            $types = ""; // Define types based on the data types of attributes
+            foreach ($arrayOfAttributes as $value) {
+                if (is_int($value)) {
+                    $types .= 'i'; // Integer
+                } elseif (is_float($value)) {
+                    $types .= 'd'; // Double
+                } else {
+                    $types .= 's'; // String
+                }
+            }
+            $stmt->bind_param($types, ...$params);
+            
+            // Execute the statement
+            $result = $stmt->execute();
+            
+            // Close the statement
+            $stmt->close();
+            
+            return $result;
+        } else {
+            // Handle error if prepare fails
+            return false;
+        }
     }
+    
     public static function edit($uniqueIdentifier, $arrOfKeyValue, $UniqueIdentifierName){
         $conn = self::getDbConnection();
         $set = "";
@@ -62,11 +110,11 @@ class UserMapper implements Mapper{
         }
         $set = rtrim($set, ", ");
         $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = '".$uniqueIdentifier."'";
-        if ($query)
-            echo "<br> data changed sucessfully! <br>";
-        else {
-            echo "<br> can't update it in db <br>";
-        }
+        // if ($query)
+        //     echo "<br> data changed sucessfully! <br>";
+        // else {
+        //     echo "<br> can't update it in db <br>";
+        // }
         return $conn->query($query);
     }
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
@@ -165,6 +213,21 @@ class UserMapper implements Mapper{
         } else {
             return false;
         }
+    }
+    public static function selectPrivilegedUsers(){
+        $allUsers = self::selectAllUsers();
+        $allPrivileged = array();
+        for ($i=0; $i < count($allUsers); $i++) { 
+            if ($allUsers[$i]['privilgedOrNot'] == 1) {
+                array_push($allPrivileged, $allUsers[$i]);
+            }
+        }
+        return $allPrivileged;
+    }
+    public static function retrieveObject($userId){
+        $userArr = self::selectObjectAsArray($userId, 'id');
+        $user = new User($userArr[0]['fullName'], $userArr[0]['username'], $userArr[0]['gender'], $userArr[0]['email'], $userArr[0]['password']);
+        return $user;
     }
 }
     

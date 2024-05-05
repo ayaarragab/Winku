@@ -253,4 +253,5 @@ class questionToUser
             echo '</div>';
         }   
     }
+    public static function showAllQuestionsPerSubcategory($subcategoryId, $hisQuestionOrNot){}
 }

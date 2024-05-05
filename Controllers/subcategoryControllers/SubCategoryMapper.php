@@ -1,18 +1,18 @@
 <?php
-require_once 'D:\xampp2\htdocs\Winku-aya-s_branch\Controllers\Mapper\mapperHelper.php';
-require_once 'D:\xampp2\htdocs\Winku-aya-s_branch\Controllers\Mapper\mapperInterface.php';
-require_once 'D:\xampp2\htdocs\Winku-aya-s_branch\Controllers\database\dbConnection.php';
-require_once 'D:\xampp2\htdocs\Winku-aya-s_branch\Controllers\CategoryMapper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperHelper.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\Mapper\mapperInterface.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\database\dbConnection.php';
+require_once 'C:\xampp\htdocs\software-engineering-project-Updated\codebase\Controllers\categoryControllers\CategoryMapper.php';
 
 class SubCategoryMapper implements Mapper{
-    public static $tableName = 'SubCategory';
+    public static $tableName = 'subcategory';
     public static $connection;
-    public static $columns = ['name',
-                              'Category_id',
-                              'ownerUsername',
+    public static $columns = ['categoryId',
+                              'name',
                               'numberOfQuestions',
-                              'numberOfAnswers',
-                              'numberOfreports'];
+                              'numberOfreports',
+                              'ownerUsername',
+                              'numberOfAnswers'];
 
     public static function getDbConnection() {
         if (!isset(self::$connection)) {
@@ -22,18 +22,18 @@ class SubCategoryMapper implements Mapper{
     }
    
     public static function add($object) {
+        $columns = "";
+        $values ="";
         $conn = SubCategoryMapper::getDBConnection();
-        $arrayOfAttributes = MapperHelper::extractData(self::$columns, $object);
-        print_r($arrayOfAttributes);
+        $arrayOfAttributes = MapperHelper::extractDataSubcategory(self::$columns, $object);
         foreach ($arrayOfAttributes as $key => $value) {
-            $columns /*.*/= "$key, ";
-            $values /* .*/= "'$value', ";
+            $columns .= "$key, ";
+            $values .= "'$value', ";
         }
         $columns = rtrim($columns, ', ');
         $values = rtrim($values, ', ');
         $query = "INSERT INTO " . self::$tableName . " ($columns) VALUES ($values)";
-        echo '<br>' . $query . '<br>';
-    
+        echo '<br>'.$query.'<br>';
         if ($conn->query($query) === TRUE) {
             // Return the last inserted ID
             return $conn->insert_id;
@@ -48,14 +48,19 @@ class SubCategoryMapper implements Mapper{
             $set .= "$column = '$value', ";
         }
         $set = rtrim($set, ", ");
-        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = ".$uniqueIdentifier;
-        if ($query)
-            echo "<br> data changed sucessfully! <br>";
-        else {
-            echo "<br> can't update it in db <br>";
+        
+        // Properly escape the unique identifier value
+        $escapedIdentifier = $conn->real_escape_string($uniqueIdentifier);
+        
+        $query = "UPDATE ".self::$tableName." SET $set WHERE ".$UniqueIdentifierName." = '".$escapedIdentifier."'";
+        
+        if ($conn->query($query) === TRUE) {
+            return true;
+        } else {
+            return false;
         }
-        return $conn->query($query);
     }
+    
 
     public static function delete($uniqueIdentifier, $UniqueIdentifierName){
         $connection = self::getDbConnection();
@@ -64,10 +69,10 @@ class SubCategoryMapper implements Mapper{
         if ($connection->query($sql) === TRUE) {
             // Decrease numOfSubcategories in Category table
             $categoryId = $uniqueIdentifier;
-            $categoryNumOfSubcategories = CategoryMapper::selectSpecificAttr($categoryId, 'id', 'numOfSubcategories');
-            if ($categoryNumOfSubcategories !== false) {
-                $categoryNumOfSubcategories = $categoryNumOfSubcategories-1;
-                CategoryMapper::edit($categoryId, ['numOfSubcategories' => $categoryNumOfSubcategories], 'id');
+            $NumOfSubcategories = CategoryMapper::selectSpecificAttr($categoryId, 'id', 'numOfSubcategories');
+            if ($NumOfSubcategories !== false) {
+                $NumOfSubcategories = $NumOfSubcategories-1;
+                CategoryMapper::edit($categoryId, ['numOfSubcategories' => $NumOfSubcategories], 'id');
             }
     
             return true;
@@ -80,8 +85,8 @@ class SubCategoryMapper implements Mapper{
    
     public static function selectObjectAsArray($UniqueIdentifier, $UniqueIdentifierName){
         $conn = self::getDbConnection();
-        $sqlAtatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = ".$UniqueIdentifierName;
-        $result = $conn->query($sqlAtatement);
+        $sqlStatement = "SELECT * FROM ".self::$tableName." WHERE ".$UniqueIdentifierName." = '".$UniqueIdentifier."'";
+        $result = $conn->query($sqlStatement);
         if ($result->num_rows > 0) {
             $data = array();
             while ($row = $result->fetch_assoc()) {
@@ -92,10 +97,11 @@ class SubCategoryMapper implements Mapper{
             return false;
         }
     }
+    
     public static function selectSpecificAttr($uniqueIdentifier, $UniqueIdentifierName, $attrname){
         $objectArr = self::selectObjectAsArray($uniqueIdentifier, $UniqueIdentifierName);
         if ($objectArr !== false) {
-            return $objectArr[$attrname];
+            return $objectArr[0][$attrname];
         }
         else {
             echo "couldn't find the data";
@@ -120,6 +126,20 @@ class SubCategoryMapper implements Mapper{
             return false;
         }
     else{
+        return false;
+    }
+}
+public static function selectall(){
+    $conn = self::getDbConnection();
+    $sqlAtatement = "SELECT * FROM ".self::$tableName;
+    $result = $conn->query($sqlAtatement);
+    if ($result->num_rows > 0) {
+        $data = array();
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+        return $data;
+    } else {
         return false;
     }
 }
